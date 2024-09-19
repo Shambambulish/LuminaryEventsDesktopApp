@@ -1,0 +1,27 @@
+{
+  "name": "luminaryeventsdesktop",
+  "version": "1.0.0",
+  "description": "DesktopApp made for LuminaryEvents",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shambambulish/LuminaryEventsDesktopApp.git"
+  },
+  "keywords": [
+    "electron",
+    "javascript"
+  ],
+  "author": "Samuel Koistinen, Tino Roivanen ,Terho Träff ,Ville Pelimanni ,Markus RisuAho ,Lopose Onni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shambambulish/LuminaryEventsDesktopApp/issues"
+  },
+  "homepage": "https://github.com/Shambambulish/LuminaryEventsDesktopApp#readme",
+  "dependencies": {
+    "electron": "^32.1.1"
+  }
+}
