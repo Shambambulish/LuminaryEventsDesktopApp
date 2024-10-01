@@ -1,0 +1,16 @@
+{
+  "name": "luminaryeventsdt",
+  "productName": "Luminary Events Desktop App",
+  "version": "1.0.0",
+  "description": "Luminary Events Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Koodigoblinit",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^32.1.2"
+  }
+}
