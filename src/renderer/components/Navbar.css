@@ -2,7 +2,7 @@
     background-color: #38343C !important;
 }
 .MuiButtonBase-root{
-    color: #F2F3F5;
+    color: #F2F3F5 !important;
 }
 .divideline{
     background-color: #FF93FF;
