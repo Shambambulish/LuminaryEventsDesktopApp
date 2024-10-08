@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -46,7 +47,9 @@ export function Navbar() {
         <Typography>Electron Testinavbar</Typography>
         {isMobile ? (
           <>
-            <IconButton onClick={() => toggleDrawer(true)} />
+            <IconButton onClick={() => toggleDrawer(true)}>
+            <GiHamburgerMenu/>
+              </IconButton>
             <Drawer open={drawerOpen} onClick={() => toggleDrawer(false)}>
               <List>
                 <ListItem>{menuItems}</ListItem>
