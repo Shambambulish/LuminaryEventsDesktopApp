@@ -6,19 +6,17 @@ import { Navbar } from './components/Navbar';
 import { Home } from './components/pages/home';
 import { Testisivu } from './components/pages/testisivu';
 
-
-
 export default function App() {
   return (
     <Router>
-        <CssBaseline/>
-          <Navbar/>
-          <div>
-            <Routes>
-              <Route path ="/" element={<Home/>}/>
-              <Route path ="/Testisivu" element={<Testisivu/>}/>
-            </Routes>
-          </div>
+      <CssBaseline />
+      <Navbar />
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Testisivu" element={<Testisivu />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
