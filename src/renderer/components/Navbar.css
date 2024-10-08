@@ -1,0 +1,13 @@
+.MuiAppBar-root{
+    background-color: #38343C !important;
+}
+.MuiButtonBase-root{
+    color: #F2F3F5;
+}
+.divideline{
+    background-color: #FF93FF;
+    width: 0.05em;
+    height: 2.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+}

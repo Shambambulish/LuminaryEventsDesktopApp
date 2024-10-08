@@ -3,8 +3,10 @@ import icon from '../../assets/icon.svg';
 import './App.css';
 import { CssBaseline } from '@mui/material';
 import { Navbar } from './components/Navbar';
-import { Home } from './components/pages/home';
-import { Testisivu } from './components/pages/testisivu';
+import { Home } from './components/pages/Home';
+import { Kalenteri } from './components/pages/Kalenteri';
+import { Varasto } from './components/pages/Varasto';
+import { Asetukset } from './components/pages/Asetukset';
 
 export default function App() {
   return (
@@ -14,7 +16,9 @@ export default function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Testisivu" element={<Testisivu />} />
+          <Route path="/Kalenteri" element={<Kalenteri />} />
+          <Route path="/Varasto" element={<Varasto />} />
+          <Route path="/Asetukset" element={<Asetukset />} />
         </Routes>
       </div>
     </Router>

@@ -1,17 +1,8 @@
-import {
-  AppBar,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  Toolbar,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { AppBar,Drawer,IconButton,List,ListItem,Toolbar,Typography,useMediaQuery,useTheme } from '@mui/material';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
+import "./Navbar.css";
 
 export function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -24,27 +15,44 @@ export function Navbar() {
 
   const menuItems = (
     <>
+    <div className='divideline'/>
       <NavLink to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
         <IconButton>
           <Typography>Kotisivu</Typography>
         </IconButton>
       </NavLink>
-
+    <div className='divideline'/>
       <NavLink
-        to="Testisivu"
-        style={{ textDecoration: 'none', color: 'inherit' }}
-      >
+        to="/Kalenteri"
+        style={{ textDecoration: 'none', color: 'inherit' }}>
         <IconButton>
-          <Typography>Testisivu</Typography>
+          <Typography>Kalenteri</Typography>
         </IconButton>
       </NavLink>
+    <div className='divideline'/>
+      <NavLink
+        to="/Varasto"
+        style={{ textDecoration: 'none', color: 'inherit' }}>
+        <IconButton>
+          <Typography>Varasto</Typography>
+        </IconButton>
+      </NavLink>
+    <div className='divideline'/>
+      <NavLink
+        to="/Asetukset"
+        style={{ textDecoration: 'none', color: 'inherit' }}>
+        <IconButton>
+          <Typography>Asetukset</Typography>
+        </IconButton>
+      </NavLink>
+    <div className='divideline'/>
     </>
   );
 
   return (
     <AppBar position="fixed">
       <Toolbar>
-        <Typography>Electron Testinavbar</Typography>
+        <Typography>Lumeventslogohere</Typography>
         {isMobile ? (
           <>
             <IconButton onClick={() => toggleDrawer(true)}>
