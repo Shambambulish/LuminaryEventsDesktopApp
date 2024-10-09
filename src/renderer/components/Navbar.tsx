@@ -2,6 +2,7 @@ import { AppBar,Drawer,IconButton,List,ListItem,Toolbar,Typography,useMediaQuery
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
+import Logo from "./img/Logo.png"
 import "./Navbar.css";
 
 export function Navbar() {
@@ -15,10 +16,9 @@ export function Navbar() {
 
   const menuItems = (
     <>
-    <div className='divideline'/>
       <NavLink to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
         <IconButton>
-          <Typography>Kotisivu</Typography>
+          <img className='Logobutton' src={Logo}/>
         </IconButton>
       </NavLink>
     <div className='divideline'/>
@@ -52,7 +52,6 @@ export function Navbar() {
   return (
     <AppBar position="fixed">
       <Toolbar>
-        <Typography>Lumeventslogohere</Typography>
         {isMobile ? (
           <>
             <IconButton onClick={() => toggleDrawer(true)}>

@@ -6,8 +6,23 @@
 }
 .divideline{
     background-color: #FF93FF;
-    width: 0.05em;
+    width: 1px;
     height: 2.5em;
     margin-left: 1em;
     margin-right: 1em;
 }
+.Logobutton{
+    width: 170px;
+    height: 35px;
+}
+
+/*
+Hamburgermenu background color, and the list width if needed.
+
+.MuiDrawer-paper{
+    background-color: #38343C !important;
+}
+
+.hammenu{
+    width: 20em;
+}*/
