@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
 import Logo from "./img/Logo.png"
-import "./Navbar.css";
+import "./css/Navbar.css";
 
 export function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
