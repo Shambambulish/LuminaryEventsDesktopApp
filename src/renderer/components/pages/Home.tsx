@@ -28,7 +28,7 @@ export function Home() {
   };
 
   const action = (
-    <React.Fragment>
+    <>
       <Button color="secondary" size="small" onClick={handleClose}>
         UNDO
       </Button>
@@ -40,7 +40,7 @@ export function Home() {
       >
         <CloseIcon fontSize="small" />
       </IconButton>
-    </React.Fragment>
+    </>
   );
 
   return (
@@ -84,7 +84,14 @@ export function Home() {
       >
         Testinappi 4
       </Button>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={(event, reason) => {
+          reason === 'escapeKeyDown';
+          setOpen(false);
+        }}
+      >
         <Alert
           onClose={handleClose}
           severity={severity}
