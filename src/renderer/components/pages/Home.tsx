@@ -1,48 +1,14 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import Alert from '@mui/material/Alert';
+import { Alertsystem } from '../Alertsystem';
+
+const handleClick = () => {
+  setopen(true);
+  setSeverity(event.target.getAttribute('severity'));
+  setMessage(event.target.getAttribute('message'));
+};
 
 export function Home() {
-  const [open, setOpen] = React.useState(false);
-  const [severity, setSeverity] = React.useState('success');
-  const [message, setMessage] = React.useState('allan please add message');
-
-  const handleClick = () => {
-    setOpen(true);
-    setSeverity(event.target.getAttribute('severity'));
-    setMessage(event.target.getAttribute('message'));
-  };
-
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason,
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const action = (
-    <>
-      <Button color="secondary" size="small" onClick={handleClose}>
-        UNDO
-      </Button>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </>
-  );
-
   return (
     <div>
       <h2>Tää o kotisivu</h2>
@@ -84,23 +50,7 @@ export function Home() {
       >
         Testinappi 4
       </Button>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={(event, reason) => {
-          reason === 'escapeKeyDown';
-          setOpen(false);
-        }}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={severity}
-          variant="filled"
-          sx={{ width: '100%' }}
-        >
-          {message}
-        </Alert>
-      </Snackbar>
+      <Alertsystem></Alertsystem>
     </div>
   );
 }
