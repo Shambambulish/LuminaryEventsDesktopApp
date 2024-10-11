@@ -4,11 +4,26 @@ import { NavLink } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
 import Logo from "./img/Logo.png"
 import "./css/Navbar.css";
+import { Asetukset } from './pages/Asetukset';
+import { Popup } from './popup';
+import React from 'react';
 
 export function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [open, setOpen] = React.useState(false);
+
+  
+  const handleClickOpen = () => {
+    setOpen(true);
+};
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
 
   const toggleDrawer = (open: boolean) => {
     setDrawerOpen(open);
@@ -45,6 +60,10 @@ export function Navbar() {
           <Typography>Asetukset</Typography>
         </IconButton>
       </NavLink>
+      <IconButton onClick={handleClickOpen}>
+                <GiHamburgerMenu />
+            </IconButton>
+            <Popup open={open} handleClose={handleClose} />
     <div className='divideline'/>
     </>
   );
