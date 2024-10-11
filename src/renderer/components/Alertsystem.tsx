@@ -1,58 +1,45 @@
-import * as React from 'react';
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import React, { useState } from 'react';
+import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
 
-export function Alertsystem() {
-  const [open, setOpen] = React.useState(false);
-  const [severity, setSeverity] = React.useState('warning');
-  const [message, setMessage] = React.useState('i am default message');
+export const AlertSystem = () => {
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState<
+    'error' | 'warning' | 'info' | 'success'
+  >('info');
+  const [message, setMessage] = useState('');
+
+  const showAlert = (
+    msg: string,
+    sev: 'error' | 'warning' | 'info' | 'success',
+  ) => {
+    setMessage(msg);
+    setSeverity(sev);
+    setOpen(true);
+  };
 
   const handleClose = (
     event: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason,
+    reason?: string,
   ) => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
-  const action = (
-    <>
-      <Button color="secondary" size="small" onClick={handleClose}>
-        UNDO
-      </Button>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </>
-  );
-  return (
-    <Snackbar
-      open={open}
-      autoHideDuration={6000}
-      onClose={(event, reason) => {
-        reason === 'escapeKeyDown';
-        setOpen(false);
-      }}
-    >
+  const AlertComponent = () => (
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
       <Alert
         onClose={handleClose}
         severity={severity}
         variant="filled"
         sx={{ width: '100%' }}
       >
-        lol apua {message}
+        {message}
       </Alert>
     </Snackbar>
   );
-}
+
+  return { showAlert, AlertComponent };
+};

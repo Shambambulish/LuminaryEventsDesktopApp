@@ -1,56 +1,41 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { Alertsystem } from '../Alertsystem';
-
-const handleClick = () => {
-  setopen(true);
-  setSeverity(event.target.getAttribute('severity'));
-  setMessage(event.target.getAttribute('message'));
-};
+import { AlertSystem } from '../Alertsystem';
 
 export function Home() {
+  const { showAlert, AlertComponent } = AlertSystem();
+
   return (
     <div>
-      <h2>Tää o kotisivu</h2>
       <Button
-        onClick={handleClick}
-        variant="outlined"
-        severity="success"
-        message="success"
+        variant="contained"
+        color="success"
+        onClick={() => showAlert('Tää toimi', 'success')} // message, severity
       >
         Testinappi 1
       </Button>
-      <br />
-      <br />
       <Button
-        onClick={handleClick}
         variant="outlined"
-        severity="info"
-        message="info"
+        color="info"
+        onClick={() => showAlert('Tää info toimi', 'info')} // message, severity
       >
         Testinappi 2
       </Button>
-      <br />
-      <br />
       <Button
-        onClick={handleClick}
-        variant="outlined"
-        severity="error"
-        message="error"
+        variant="text"
+        color="error"
+        onClick={() => showAlert('Tää errori toimi', 'error')} // message, severity
       >
         Testinappi 3
       </Button>
-      <br />
-      <br />
       <Button
-        onClick={handleClick}
         variant="outlined"
-        severity="warning"
-        message="warning"
+        color="warning"
+        onClick={() => showAlert('Tää warningi toimi', 'warning')} // message, severity
       >
         Testinappi 4
       </Button>
-      <Alertsystem></Alertsystem>
+      <AlertComponent />
     </div>
   );
 }
