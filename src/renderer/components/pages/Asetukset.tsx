@@ -1,6 +1,7 @@
 import React from 'react';
-import { Checkbox, FormControlLabel } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, ThemeProvider } from '@mui/material';
 import "../css/Asetukset.css"
+import { teema12 } from '../theme';
 
 export function Asetukset() {
   const [checked, setChecked] = React.useState(true);
@@ -11,7 +12,9 @@ export function Asetukset() {
 
 
   return (
+ 
       <div className="settingcontainer">
+           <ThemeProvider theme={teema12}>
         <div className="settings">
           <FormControlLabel
             label="Asetus 1"
@@ -19,6 +22,11 @@ export function Asetukset() {
             control={<Checkbox checked={checked} onChange={handleChange} />}
           />
         </div>
+        <Button
+        variant="contained"
+        color="primary"
+      >RAYH</Button>
+        </ThemeProvider>
     </div>
   );
 }
