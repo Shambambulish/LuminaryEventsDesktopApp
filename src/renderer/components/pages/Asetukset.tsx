@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Checkbox, FormControlLabel, ThemeProvider, Typography, useTheme } from '@mui/material';
 import "../css/Asetukset.css"
-import { teema12 } from '../theme';
+import { luminary } from '../theme';
 
 export function Asetukset() {
   const [checked, setChecked] = React.useState(true);
@@ -21,20 +21,28 @@ export function Asetukset() {
             control={<Checkbox checked={checked} onChange={handleChange} />}
           />
         </div>
-        <ThemeProvider theme={teema12}>
+        <ThemeProvider theme={luminary}>
         <Button
         variant="contained"
         style={{
-          backgroundColor: teema12.palette.primary.dark,
+          backgroundColor: luminary.palette.primary.dark,
         }}
       >RAYH</Button>
         <Button
           variant="contained"
           sx={{
-            backgroundColor: teema12.palette.primary.main,
+            backgroundColor: luminary.palette.primary.main,
           }}
         >
-         <Typography color={teema12.palette.secondary.contrastText}> RAYH2 </Typography>
+         <Typography color={luminary.palette.secondaryContrastText}> RAYH2 </Typography>
+        </Button>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: luminary.palette.lumBlue,
+          }}
+        >
+         <Typography color={luminary.palette.secondaryContrastText}> RÖÖÖÖH </Typography>
         </Button>
         </ThemeProvider>
     </div>
