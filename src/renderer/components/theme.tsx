@@ -13,7 +13,8 @@ export const teema12 = createTheme({
     secondary: {
       main: "#4CC6FF",
       dark:"#FF93FF",
-      light:"#FFC227"
+      light:"#FFC227",
+      contrastText:"#FF93FF"
     }
   }
 });
