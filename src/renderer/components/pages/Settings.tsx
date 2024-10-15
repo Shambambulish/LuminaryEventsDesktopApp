@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Checkbox, FormControlLabel, ThemeProvider, Typography, useTheme } from '@mui/material';
-import "../css/settings.css"
-import { luminary } from '../theme';
+import "../css/Settings.css"
+import { luminary } from '../Theme';
 
 export function Settings() {
   const [checked, setChecked] = React.useState(true);

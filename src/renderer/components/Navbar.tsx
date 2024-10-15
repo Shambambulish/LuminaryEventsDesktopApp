@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Logo from "./img/Logo.png"
 import "./css/Navbar.css";
 import { Settings } from './pages/Settings';
-import { Popup } from './popup';
+import { Popup } from './Popup';
 import React from 'react';
 
 export function Navbar() {

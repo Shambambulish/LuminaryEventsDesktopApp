@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Box, ThemeProvider, Typography, } from '@mui/material';
-import { luminary } from '../theme';
-import "../css/inventory.css"
+import { luminary } from '../Theme';
+import "../css/Inventory.css"
 
 export function Inventory() {
 

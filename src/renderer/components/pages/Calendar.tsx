@@ -1,4 +1,4 @@
-import "../css/calendar.css";
+import "../css/Calendar.css";
 import * as React from 'react';
 import dayjs from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
@@ -6,7 +6,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import 'dayjs/locale/fi';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { luminary } from '../theme';
+import { luminary } from '../Theme';
 import { Box } from '@mui/material';
 
 export function Calendar() {
