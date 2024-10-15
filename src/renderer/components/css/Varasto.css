@@ -1,0 +1,17 @@
+.card{
+    padding: 30px;
+    margin: 20px;
+    border-radius: 5px;
+}
+.cardholder{
+    display: flex;
+    flex-direction: row;
+}
+.box{
+    width: 180px;
+    height: 180px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
