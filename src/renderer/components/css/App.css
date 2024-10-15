@@ -11,9 +11,9 @@ body {
   height: 100vh;
   background: linear-gradient(
     200.96deg,
-    var(--luminary-yellow) -29.09%,
-    var(--luminary-pink) 51.77%,
-    var(--luminary-purple) 129.35%
+    var(--luminary-blue) -300%,
+    var(--luminary-darkest) 45% 55%,
+    var(--luminary-pink) 300%
   );
   font-family: sans-serif;
   overflow-y: hidden;
