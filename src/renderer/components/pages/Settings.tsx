@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Checkbox, FormControlLabel, ThemeProvider, Typography, useTheme } from '@mui/material';
-import "../css/Asetukset.css"
+import "../css/settings.css"
 import { luminary } from '../theme';
 
-export function Asetukset() {
+export function Settings() {
   const [checked, setChecked] = React.useState(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

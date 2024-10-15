@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Box, ThemeProvider, Typography, } from '@mui/material';
 import { luminary } from '../theme';
-import "../css/Varasto.css"
+import "../css/inventory.css"
 
-export function Varasto() {
+export function Inventory() {
 
   const handleClick = (boxNumber: number) => {
     console.log(`Box ${boxNumber} clicked!`);

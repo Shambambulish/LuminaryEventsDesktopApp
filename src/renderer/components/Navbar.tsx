@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
 import Logo from "./img/Logo.png"
 import "./css/Navbar.css";
-import { Asetukset } from './pages/Asetukset';
+import { Settings } from './pages/Settings';
 import { Popup } from './popup';
 import React from 'react';
 
@@ -38,7 +38,7 @@ export function Navbar() {
       </NavLink>
     <div className='divideline'/>
       <NavLink
-        to="/Kalenteri"
+        to="/Calendar"
         style={{ textDecoration: 'none', color: 'inherit' }}>
         <IconButton>
           <Typography>Kalenteri</Typography>
@@ -46,7 +46,7 @@ export function Navbar() {
       </NavLink>
     <div className='divideline'/>
       <NavLink
-        to="/Varasto"
+        to="/Inventory"
         style={{ textDecoration: 'none', color: 'inherit' }}>
         <IconButton>
           <Typography>Varasto</Typography>
@@ -54,7 +54,7 @@ export function Navbar() {
       </NavLink>
     <div className='divideline'/>
       <NavLink
-        to="/Asetukset"
+        to="/Settings"
         style={{ textDecoration: 'none', color: 'inherit' }}>
         <IconButton>
           <Typography>Asetukset</Typography>
