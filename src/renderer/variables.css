@@ -1,5 +1,11 @@
 :root{
-    --luminary-pink: #dd7589;
-    --luminary-yellow: #fedc2a;
-    --luminary-purple: #7a29ce;
+    --luminary-blue: #4CC6FF;
+    --luminary-pink: #DD7589;
+    --luminary-yellow: #FEDC2A;
+    --luminary-purple: #7A29CE;
+    --luminary-darkest: #201C24;
+    --luminary-darker: #302C34;
+    --luminary-dark: #38343C;
+    --luminary-darkerFontColor: #949BA4;
+    --luminary-lightFontColor: #F2F3F5;
 }
