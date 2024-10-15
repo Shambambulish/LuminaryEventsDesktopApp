@@ -1,6 +1,6 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
-import './App.css';
+import './components/css/App.css';
 import { CssBaseline } from '@mui/material';
 import { Navbar } from './components/Navbar';
 import { Home } from './components/pages/Home';
