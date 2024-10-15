@@ -1,14 +1,15 @@
-import React from 'react';
-import { Button, Box, ThemeProvider, Typography, } from '@mui/material';
+import { Box, ThemeProvider, Typography, } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { luminary } from '../Theme';
 import "../css/Inventory.css"
 
 export function Inventory() {
 
-  const handleClick = (boxNumber: number) => {
-    console.log(`Box ${boxNumber} clicked!`);
-  };
+  const navigate = useNavigate();
 
+  const handleClick = (path: string) => {
+    navigate(path);
+  };
 
 
   return (
@@ -19,7 +20,8 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
-          }} onClick={() => handleClick(1)}
+          }}
+          onClick={() => handleClick('/AllProducts')}
         >
          <Typography color={luminary.palette.secondaryContrastText} sx={{ pointerEvents: 'none' }}> Kaikki tuotteet </Typography>
         </Box>
@@ -30,7 +32,8 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
-          }} onClick={() => handleClick(2)}
+          }}
+          onClick={() => handleClick('/InventoryProducts')}
         >
          <Typography color={luminary.palette.secondaryContrastText} sx={{ pointerEvents: 'none' }}> Tuotteet varastossa </Typography>
         </Box>
@@ -41,7 +44,8 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
-          }} onClick={() => handleClick(3)}
+          }}
+          onClick={() => handleClick('/EventProducts')}
         >
          <Typography color={luminary.palette.secondaryContrastText} sx={{ pointerEvents: 'none' }}> Tuotteet tapahtumissa </Typography>
         </Box>
@@ -54,7 +58,8 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
-          }} onClick={() => handleClick(4)}
+          }}
+          onClick={() => handleClick('/History')}
         >
          <Typography color={luminary.palette.secondaryContrastText} sx={{ pointerEvents: 'none' }}> Historia </Typography>
         </Box>
@@ -65,7 +70,8 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
-          }} onClick={() => handleClick(5)}
+          }}
+          onClick={() => handleClick('/Scan')}
         >
          <Typography color={luminary.palette.secondaryContrastText} sx={{ pointerEvents: 'none' }}> Skannaa QR-koodi </Typography>
         </Box>
@@ -76,7 +82,8 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
-          }} onClick={() => handleClick(6)}
+          }}
+          onClick={() => handleClick('/CreateProduct')}
         >
          <Typography color={luminary.palette.secondaryContrastText} sx={{ pointerEvents: 'none' }}> Luo tuote </Typography>
         </Box>
