@@ -3,6 +3,7 @@ import * as React from 'react';
 import dayjs from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/fi';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { luminary } from '../theme';
@@ -18,7 +19,7 @@ export function Calendar() {
         backgroundColor: luminary.palette.primary.main,
       }}
     >
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fi">
       <DemoContainer components={['DateCalendar', 'DateCalendar', 'DateCalendar']}>
         <DemoItem label={'Tässä o kalenteri :D'}>
           <DateCalendar
