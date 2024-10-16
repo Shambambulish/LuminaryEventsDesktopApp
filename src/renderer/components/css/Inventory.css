@@ -10,8 +10,21 @@
 .box{
     width: 180px;
     height: 180px;
+    padding-top: 15px;
     border-radius: 15px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    text-align: center;
+}
+.storagedata{
+    padding-top: 40px;
+}
+.cardtitle{
+    font-size: 16px !important;
+    font-weight: bold !important;
+}
+.historydata{
+    padding-top: 30px;
+    margin-right: 5px;
 }
