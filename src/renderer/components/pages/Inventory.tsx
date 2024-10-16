@@ -20,6 +20,7 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
+            cursor: 'pointer',
           }}
           onClick={() => handleClick('/AllProducts')}
         >
@@ -32,6 +33,7 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
+            cursor: 'pointer',
           }}
           onClick={() => handleClick('/InventoryProducts')}
         >
@@ -44,6 +46,7 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
+            cursor: 'pointer',
           }}
           onClick={() => handleClick('/EventProducts')}
         >
@@ -58,6 +61,7 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
+            cursor: 'pointer',
           }}
           onClick={() => handleClick('/History')}
         >
@@ -70,6 +74,7 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
+            cursor: 'pointer',
           }}
           onClick={() => handleClick('/Scan')}
         >
@@ -82,6 +87,7 @@ export function Inventory() {
         <Box className='box'
           sx={{
             backgroundColor: luminary.palette.primary.main,
+            cursor: 'pointer',
           }}
           onClick={() => handleClick('/CreateProduct')}
         >

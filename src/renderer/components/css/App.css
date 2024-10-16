@@ -64,3 +64,11 @@ a:hover {
   align-items: center;
   margin: 20px 0;
 }
+.returnbutton{
+  position: fixed;
+  left: 2%;
+  top: 13%;
+}
+.returntext{
+  padding-right: 6px;
+}
