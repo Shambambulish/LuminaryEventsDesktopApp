@@ -16,6 +16,7 @@
     align-items: flex-start;
     justify-content: center;
     text-align: center;
+ /*   box-shadow: 0px 8px 1px -8px #ff93ff1f, 5px 18px 55px 5px #ff93ff1f; */
 }
 .storagedata{
     padding-top: 40px;
