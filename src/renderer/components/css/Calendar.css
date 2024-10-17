@@ -30,6 +30,14 @@
     left: 380px;
     top: 20px;
     padding: 20px 50px 10px 30px;
+    min-height: 250px;
+    max-height: 390px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .calendarinfo::-webkit-scrollbar {
+    display: none;
   }
 
   .MuiPickersCalendarHeader-label{
@@ -78,4 +86,10 @@
 
   .MuiPickersMonth-monthButton.Mui-selected {
     background-color: #FF93FF !important;
+  }
+  .eventinfo{
+    background-color: #302C34;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 15px;
   }

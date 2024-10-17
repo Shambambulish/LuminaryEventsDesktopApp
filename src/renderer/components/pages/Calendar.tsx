@@ -12,7 +12,7 @@ import { Box } from '@mui/material';
 export function Calendar() {
   const event_picked = "Tapahtuma 15.7.2024 ";
   const event_orderer = "Matti Meikäläinen";
-  const order_info = "Tarvin kaasupullon ja pullonmaitoa keikalle";
+  const order_info = "Tarvin kaasupullon ja pullonmaitoa keikalle tetetetetetetetete tsajajajajajajajajajajajajaja";
     return (
       <div className="calendarcontainer">
       <div>
@@ -32,15 +32,24 @@ export function Calendar() {
         </DemoItem>
       </DemoContainer>
       <Box className="calendarinfo"
-      sx={{
-        backgroundColor: luminary.palette.primary.main,
-      }}
       >
-      <div>
+      <div className="eventinfo">
       <p> {event_picked} </p>
       <p> {event_orderer} </p>  
       <p> {order_info} </p>
       </div>
+      <div className="eventinfo">
+        <p> {event_picked} </p>
+        <p> {event_orderer} </p>  
+        <p> {order_info} </p>
+      </div>
+      <div className="eventinfo">
+        <p> {event_picked} </p>
+        <p> {event_orderer} </p>  
+        <p> {order_info} </p>
+      </div>
+
+      
       </Box>
     </LocalizationProvider>
     </Box>
