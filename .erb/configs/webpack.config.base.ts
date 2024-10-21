@@ -6,6 +6,14 @@ import webpack from 'webpack';
 import TsconfigPathsPlugins from 'tsconfig-paths-webpack-plugin';
 import webpackPaths from './webpack.paths';
 import { dependencies as externals } from '../../release/app/package.json';
+import dotenv from 'dotenv';
+
+const env = dotenv.config().parsed;
+
+const envKeys = env ? Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {}) : {};
 
 const configuration: webpack.Configuration = {
   externals: [...Object.keys(externals || {})],
@@ -53,6 +61,7 @@ const configuration: webpack.Configuration = {
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
     }),
+    new webpack.DefinePlugin(envKeys),
   ],
 };
 

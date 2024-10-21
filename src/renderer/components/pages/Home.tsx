@@ -4,7 +4,6 @@ import { AlertSystem } from '../Alertsystem';
 
 export function Home() {
   const { showAlert, AlertComponent } = AlertSystem();
-
   return (
     <div>
       <Button
