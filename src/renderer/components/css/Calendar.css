@@ -1,95 +1,95 @@
-.calendarcontainer{
-    position: absolute;
-    left: 100px;
-    top: 150px;
-    padding: 20px 250px 100px 30px;
-    border-radius: 25px;
+.calendarcontainer {
+  position: absolute;
+  left: 100px;
+  top: 150px;
+  padding: 20px 250px 100px 30px;
+  border-radius: 25px;
   /*  padding-top: 10em;
     padding-bottom: 10em;
     padding-right: 20em;
     padding-left: 20em;
   */
-  }
-  .conttainer{
-    border-radius: 25px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 9px;
-    padding-left: 10px;
-  }
+}
+.conttainer {
+  border-radius: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 9px;
+  padding-left: 10px;
+}
 
-  .calendarinfo {
-    color:#F2F3F5;
-    position: absolute;
-    text-wrap: balance;
-    border-radius: 25px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    padding-right: 20px;
-    padding-left: 10px;
-    left: 380px;
-    top: 20px;
-    padding: 20px 50px 10px 30px;
-    min-height: 250px;
-    max-height: 390px;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .calendarinfo::-webkit-scrollbar {
-    display: none;
-  }
+.calendarinfo {
+  color: #f2f3f5;
+  position: absolute;
+  text-wrap: balance;
+  border-radius: 25px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  padding-left: 10px;
+  left: 380px;
+  top: 20px;
+  padding: 20px 50px 10px 30px;
+  min-height: 250px;
+  max-height: 390px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.calendarinfo::-webkit-scrollbar {
+  display: none;
+}
 
-  .MuiPickersCalendarHeader-label{
-    color: #FF93FF !important;
-  }
+.MuiPickersCalendarHeader-label {
+  color: #ff93ff !important;
+}
 
-  .MuiTypography-body2{
-    color: #FF93FF !important;
-  }
+.MuiTypography-body2 {
+  color: #ff93ff !important;
+}
 
-  .MuiPickersCalendarHeader-switchViewIcon{
-    color: #4CC6FF !important;
-  }
+.MuiPickersCalendarHeader-switchViewIcon {
+  color: #4cc6ff !important;
+}
 
-  .MuiPickersArrowSwitcher-leftArrowIcon{
-    color: #4CC6FF !important;
-  }
+.MuiPickersArrowSwitcher-leftArrowIcon {
+  color: #4cc6ff !important;
+}
 
-  .MuiPickersArrowSwitcher-rightArrowIcon{
-    color: #4CC6FF !important;
-  }
+.MuiPickersArrowSwitcher-rightArrowIcon {
+  color: #4cc6ff !important;
+}
 
-  .MuiDayCalendar-weekDayLabel{
-    color: #FFC227 !important;
-  }
+.MuiDayCalendar-weekDayLabel {
+  color: #ffc227 !important;
+}
 
-  .MuiPickersDay-today {
-    border: 2px solid #FF93FF !important;
-  }
+.MuiPickersDay-today {
+  border: 2px solid #ff93ff !important;
+}
 
-  .MuiPickersDay-root.Mui-selected {
-    background-color: #FF93FF !important;
-  }
+.MuiPickersDay-root.Mui-selected {
+  background-color: #ff93ff !important;
+}
 
-  .MuiPickersYear-root {
-    color: #F2F3F5 !important;
-  }
+.MuiPickersYear-root {
+  color: #f2f3f5 !important;
+}
 
-  .MuiPickersYear-yearButton.Mui-selected {
-    background-color: #FF93FF !important;
-  }
+.MuiPickersYear-yearButton.Mui-selected {
+  background-color: #ff93ff !important;
+}
 
-  .MuiPickersMonth-root {
-    color: #F2F3F5 !important;
-  }
+.MuiPickersMonth-root {
+  color: #f2f3f5 !important;
+}
 
-  .MuiPickersMonth-monthButton.Mui-selected {
-    background-color: #FF93FF !important;
-  }
-  .eventinfo{
-    background-color: #302C34;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 15px;
-  }
+.MuiPickersMonth-monthButton.Mui-selected {
+  background-color: #ff93ff !important;
+}
+.eventinfo {
+  background-color: #302c34;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+}

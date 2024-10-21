@@ -4,23 +4,22 @@ import { useNavigate } from 'react-router-dom';
 
 export function AllProducts() {
   const navigate = useNavigate();
-  
 
   const handleClick = (path: string) => {
     navigate(path);
   };
 
-    return (
-      <div>
-        <div className='returnbutton'>
-      <IconButton onClick={() => handleClick('/Inventory')}>
-        <Typography className='returntext'> Palaa</Typography><KeyboardReturnIcon></KeyboardReturnIcon>
-      </IconButton>
+  return (
+    <div>
+      <div className="returnbutton">
+        <IconButton onClick={() => handleClick('/Inventory')}>
+          <Typography className="returntext"> Palaa</Typography>
+          <KeyboardReturnIcon></KeyboardReturnIcon>
+        </IconButton>
       </div>
       <div>
         <h2>Täällä on kaikki tuotteet</h2>
       </div>
-      </div>
-    );
-  }
-  
+    </div>
+  );
+}

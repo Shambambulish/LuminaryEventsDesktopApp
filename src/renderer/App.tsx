@@ -26,11 +26,11 @@ export default function App() {
           <Route path="/Inventory" element={<Inventory />} />
           <Route path="/Settings" element={<Settings />} />
           <Route path="/AllProducts" element={<AllProducts />} />
-          <Route path="/InventoryProducts" element={<InventoryProducts/>} />
-          <Route path="/EventProducts" element={<EventProducts/>} />
-          <Route path="/History" element={<History/>} />
-          <Route path="/Scan" element={<Scan/>} />
-          <Route path="/CreateProduct" element={<CreateProduct/>} />
+          <Route path="/InventoryProducts" element={<InventoryProducts />} />
+          <Route path="/EventProducts" element={<EventProducts />} />
+          <Route path="/History" element={<History />} />
+          <Route path="/Scan" element={<Scan />} />
+          <Route path="/CreateProduct" element={<CreateProduct />} />
         </Routes>
       </div>
     </Router>

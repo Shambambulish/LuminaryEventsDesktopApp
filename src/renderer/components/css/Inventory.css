@@ -1,31 +1,31 @@
-.card{
-    padding: 30px;
-    margin: 20px;
-    border-radius: 5px;
+.card {
+  padding: 30px;
+  margin: 20px;
+  border-radius: 5px;
 }
-.cardholder{
-    display: flex;
-    flex-direction: row;
+.cardholder {
+  display: flex;
+  flex-direction: row;
 }
-.box{
-    width: 180px;
-    height: 180px;
-    padding-top: 15px;
-    border-radius: 15px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: center;
- /*   box-shadow: 0px 8px 1px -8px #ff93ff1f, 5px 18px 55px 5px #ff93ff1f; */
+.box {
+  width: 180px;
+  height: 180px;
+  padding-top: 15px;
+  border-radius: 15px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  /*   box-shadow: 0px 8px 1px -8px #ff93ff1f, 5px 18px 55px 5px #ff93ff1f; */
 }
-.storagedata{
-    padding-top: 40px;
+.storagedata {
+  padding-top: 40px;
 }
-.cardtitle{
-    font-size: 16px !important;
-    font-weight: bold !important;
+.cardtitle {
+  font-size: 16px !important;
+  font-weight: bold !important;
 }
-.historydata{
-    padding-top: 30px;
-    margin-right: 5px;
+.historydata {
+  padding-top: 30px;
+  margin-right: 5px;
 }

@@ -1,20 +1,20 @@
-.MuiAppBar-root{
-    background-color: #38343C !important;
+.MuiAppBar-root {
+  background-color: #38343c !important;
 }
-.MuiButtonBase-root{
-    color: #F2F3F5 !important;
+.MuiButtonBase-root {
+  color: #f2f3f5 !important;
 }
 
-.divideline{
-    background-color: #FF93FF;
-    width: 1px;
-    height: 2.5em;
-    margin-left: 1em;
-    margin-right: 1em;
+.divideline {
+  background-color: #ff93ff;
+  width: 1px;
+  height: 2.5em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
-.Logobutton{
-    width: 170px;
-    height: 35px;
+.Logobutton {
+  width: 170px;
+  height: 35px;
 }
 
 /*

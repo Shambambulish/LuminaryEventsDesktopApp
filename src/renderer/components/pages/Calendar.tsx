@@ -1,4 +1,4 @@
-import "../css/Calendar.css";
+import '../css/Calendar.css';
 import * as React from 'react';
 import dayjs from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
@@ -10,51 +10,50 @@ import { luminary } from '../Theme';
 import { Box } from '@mui/material';
 
 export function Calendar() {
-  const event_picked = "Tapahtuma 15.7.2024 ";
-  const event_orderer = "Matti Meikäläinen";
-  const order_info = "Tarvin kaasupullon ja pullonmaitoa keikalle tetetetetetetetete tsajajajajajajajajajajajajaja";
-    return (
-      <div className="calendarcontainer">
+  const event_picked = 'Tapahtuma 15.7.2024 ';
+  const event_orderer = 'Matti Meikäläinen';
+  const order_info =
+    'Tarvin kaasupullon ja pullonmaitoa keikalle tetetetetetetetete tsajajajajajajajajajajajajaja';
+  return (
+    <div className="calendarcontainer">
       <div>
-      <Box
-      className="conttainer"
-      sx={{
-        backgroundColor: luminary.palette.primary.main,
-      }}
-    >
-        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fi">
-      <DemoContainer components={['DateCalendar', 'DateCalendar', 'DateCalendar']}>
-        <DemoItem label={'Tässä o kalenteri :D'}>
-          <DateCalendar
-            defaultValue={dayjs()}
-            views={['year', 'month', 'day']}
-          />
-        </DemoItem>
-      </DemoContainer>
-      <Box className="calendarinfo"
-      >
-      <div className="eventinfo">
-      <p> {event_picked} </p>
-      <p> {event_orderer} </p>  
-      <p> {order_info} </p>
+        <Box
+          className="conttainer"
+          sx={{
+            backgroundColor: luminary.palette.primary.main,
+          }}
+        >
+          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fi">
+            <DemoContainer
+              components={['DateCalendar', 'DateCalendar', 'DateCalendar']}
+            >
+              <DemoItem label={'Tässä o kalenteri :D'}>
+                <DateCalendar
+                  defaultValue={dayjs()}
+                  views={['year', 'month', 'day']}
+                />
+              </DemoItem>
+            </DemoContainer>
+            <Box className="calendarinfo">
+              <div className="eventinfo">
+                <p> {event_picked} </p>
+                <p> {event_orderer} </p>
+                <p> {order_info} </p>
+              </div>
+              <div className="eventinfo">
+                <p> {event_picked} </p>
+                <p> {event_orderer} </p>
+                <p> {order_info} </p>
+              </div>
+              <div className="eventinfo">
+                <p> {event_picked} </p>
+                <p> {event_orderer} </p>
+                <p> {order_info} </p>
+              </div>
+            </Box>
+          </LocalizationProvider>
+        </Box>
       </div>
-      <div className="eventinfo">
-        <p> {event_picked} </p>
-        <p> {event_orderer} </p>  
-        <p> {order_info} </p>
-      </div>
-      <div className="eventinfo">
-        <p> {event_picked} </p>
-        <p> {event_orderer} </p>  
-        <p> {order_info} </p>
-      </div>
-
-      
-      </Box>
-    </LocalizationProvider>
-    </Box>
-      </div>
-      </div>
-    );
-  }
-  
+    </div>
+  );
+}

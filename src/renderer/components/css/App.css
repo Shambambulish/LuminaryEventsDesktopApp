@@ -3,7 +3,7 @@
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
 
-@import "Variables.css";
+@import 'Variables.css';
 
 body {
   position: relative;
@@ -64,11 +64,11 @@ a:hover {
   align-items: center;
   margin: 20px 0;
 }
-.returnbutton{
+.returnbutton {
   position: fixed;
   left: 2%;
   top: 13%;
 }
-.returntext{
+.returntext {
   padding-right: 6px;
 }

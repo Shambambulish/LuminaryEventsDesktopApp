@@ -4,22 +4,22 @@ import { useNavigate } from 'react-router-dom';
 
 export function Scan() {
   const navigate = useNavigate();
-  
 
   const handleClick = (path: string) => {
     navigate(path);
   };
-  
+
   return (
     <div>
-    <div className='returnbutton'>
-    <IconButton onClick={() => handleClick('/Inventory')}>
-      <Typography className='returntext'> Palaa</Typography><KeyboardReturnIcon></KeyboardReturnIcon>
-    </IconButton>
-    </div>
-    <div>
-      <h2>Täällä voi skannata QR koodeja</h2>
-    </div>
+      <div className="returnbutton">
+        <IconButton onClick={() => handleClick('/Inventory')}>
+          <Typography className="returntext"> Palaa</Typography>
+          <KeyboardReturnIcon></KeyboardReturnIcon>
+        </IconButton>
+      </div>
+      <div>
+        <h2>Täällä voi skannata QR koodeja</h2>
+      </div>
     </div>
   );
 }
