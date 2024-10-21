@@ -10,7 +10,7 @@ export function Home() {
       <Button
         variant="contained"
         color="success"
-        onClick={() => showAlert('Tää toimi', 'success')} // message, severity
+        onClick={() => showAlert(window.env.REACT_APP_API_URL, 'success')} // message, severity
       >
         Testinappi 1
       </Button>
