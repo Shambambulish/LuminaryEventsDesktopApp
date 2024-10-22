@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import placeholderlist from '../placeholderitems';
 import Grid from '@mui/material/Grid2';
+import placeholderlist from '../placeholderitems';
 import '../css/CreateProduct.css';
 
 export function CreateProduct() {
