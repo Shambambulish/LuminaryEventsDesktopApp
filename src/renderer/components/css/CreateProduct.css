@@ -5,3 +5,7 @@
 .MuiInputLabel-root{
     color: var(--luminary-lightFontColor) !important;
 }
+
+.MuiInputBase-root {
+    color: var(--luminary-lightFontColor) !important;
+}

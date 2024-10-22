@@ -33,7 +33,6 @@ export function CreateProduct() {
               id="outlined-basic"
               label="Description"
               variant="outlined"
-              type="number"
             />
           </Grid>
           <Grid size="auto">
