@@ -5,7 +5,6 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import placeholderlist from '../placeholderitems';
-import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid2';
 import '../css/CreateProduct.css';
 

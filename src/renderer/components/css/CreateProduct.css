@@ -2,3 +2,6 @@
 .gridcontainer{
     color: var(--luminary-lightFontColor);
 }
+.css-19qnlrw-MuiFormLabel-root-MuiInputLabel-root{
+    color: var(--luminary-lightFontColor) !important;
+}
