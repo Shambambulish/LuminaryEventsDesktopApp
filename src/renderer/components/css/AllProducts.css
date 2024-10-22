@@ -1,11 +1,14 @@
 .storage{
     position: absolute;
-    left: 150px;
+    left: 250px;
     top: 150px;
+    overflow-y: scroll;
+    max-height: calc(100vh - 150px);
+    scrollbar-width: none;
 }
 .storageheader{
     font-size: 20px;
-    color: #F2F3F5;
+    color: var(--luminary-lightFontColor);
     margin-bottom: 20px;
     margin-left: 25px;
 }
@@ -17,4 +20,15 @@
 }
 .css-1ll44ll-MuiOutlinedInput-notchedOutline{
     color: var(--luminary-dark);
+}
+.detail{
+    color: var(--luminary-lightFontColor);
+    padding-left: 55px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: underline;
+    text-decoration-color: var(--luminary-pink);
+    text-underline-offset: 15px;
+    text-decoration-thickness: 1px;
+
 }
