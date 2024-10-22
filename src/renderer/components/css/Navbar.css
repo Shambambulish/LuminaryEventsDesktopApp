@@ -1,12 +1,13 @@
+@import url("Variables.css");
 .MuiAppBar-root {
-  background-color: #38343c !important;
+  background-color: var(--luminary-dark) !important;
 }
 .MuiButtonBase-root {
-  color: #f2f3f5 !important;
+  color: var(--luminary-lightFontColor) !important;
 }
 
 .divideline {
-  background-color: #ff93ff;
+  background-color: var(--luminary-pink);
   width: 1px;
   height: 2.5em;
   margin-left: 1em;

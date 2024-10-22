@@ -19,7 +19,7 @@
 }
 
 .calendarinfo {
-  color: #f2f3f5;
+  color: var(--luminary-lightFontColor);
   position: absolute;
   text-wrap: balance;
   border-radius: 25px;
@@ -41,35 +41,35 @@
 }
 
 .MuiPickersCalendarHeader-label {
-  color: #ff93ff !important;
+  color: var(--luminary-pink) !important;
 }
 
 .MuiTypography-body2 {
-  color: #ff93ff !important;
+  color: var(--luminary-pink) !important;
 }
 
 .MuiPickersCalendarHeader-switchViewIcon {
-  color: #4cc6ff !important;
+  color: var(--luminary-blue) !important;
 }
 
 .MuiPickersArrowSwitcher-leftArrowIcon {
-  color: #4cc6ff !important;
+  color: var(--luminary-blue) !important;
 }
 
 .MuiPickersArrowSwitcher-rightArrowIcon {
-  color: #4cc6ff !important;
+  color: var(--luminary-blue) !important;
 }
 
 .MuiDayCalendar-weekDayLabel {
-  color: #ffc227 !important;
+  color: var(--luminary-yellow) !important;
 }
 
 .MuiPickersDay-today {
-  border: 2px solid #ff93ff !important;
+  border: 2px solid var(--luminary-pink) !important;
 }
 
 .MuiPickersDay-root.Mui-selected {
-  background-color: #ff93ff !important;
+  background-color: var(--luminary-pink) !important;
 }
 
 .MuiPickersYear-root {
@@ -77,7 +77,7 @@
 }
 
 .MuiPickersYear-yearButton.Mui-selected {
-  background-color: #ff93ff !important;
+  background-color: var(--luminary-pink) !important;
 }
 
 .MuiPickersMonth-root {
@@ -85,7 +85,7 @@
 }
 
 .MuiPickersMonth-monthButton.Mui-selected {
-  background-color: #ff93ff !important;
+  background-color: var(--luminary-pink) !important;
 }
 .eventinfo {
   background-color: #302c34;
