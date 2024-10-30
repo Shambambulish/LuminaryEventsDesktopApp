@@ -8,6 +8,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { luminary } from '../Theme';
 import { Box } from '@mui/material';
+import APIconn from '../APIconn';
 
 export function Calendar() {
   const event_picked = 'Tapahtuma 15.7.2024 ';
@@ -34,8 +35,9 @@ export function Calendar() {
                 />
               </DemoItem>
             </DemoContainer>
-            <Box className="calendarinfo">
-              <div className="eventinfo">
+            {APIconn()}
+            {/*<Box className="calendarinfo">
+               <div className="eventinfo">
                 <p> {event_picked} </p>
                 <p> {event_orderer} </p>
                 <p> {order_info} </p>
@@ -49,8 +51,8 @@ export function Calendar() {
                 <p> {event_picked} </p>
                 <p> {event_orderer} </p>
                 <p> {order_info} </p>
-              </div>
-            </Box>
+              </div> 
+            </Box>*/}
           </LocalizationProvider>
         </Box>
       </div>
