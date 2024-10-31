@@ -1,11 +1,11 @@
-@import url("Variables.css");
-.gridcontainer{
-    color: var(--luminary-lightFontColor);
+@import url('Variables.css');
+.gridcontainer {
+  color: var(--luminary-lightFontColor);
 }
-.MuiInputLabel-root{
-    color: var(--luminary-lightFontColor) !important;
+.MuiInputLabel-root {
+  color: var(--luminary-lightFontColor) !important;
 }
 
 .MuiInputBase-root {
-    color: var(--luminary-lightFontColor) !important;
+  color: var(--luminary-lightFontColor) !important;
 }

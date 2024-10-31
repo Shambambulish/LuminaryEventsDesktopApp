@@ -1,4 +1,4 @@
-@import url("Variables.css");
+@import url('Variables.css');
 .MuiAppBar-root {
   background-color: var(--luminary-dark) !important;
 }

@@ -1,34 +1,33 @@
-.storage{
-    position: absolute;
-    left: 250px;
-    top: 150px;
-    overflow-y: scroll;
-    max-height: calc(100vh - 150px);
-    scrollbar-width: none;
+.storage {
+  position: absolute;
+  left: 250px;
+  top: 150px;
+  overflow-y: scroll;
+  max-height: calc(100vh - 150px);
+  scrollbar-width: none;
 }
-.storageheader{
-    font-size: 20px;
-    color: var(--luminary-lightFontColor);
-    margin-bottom: 20px;
-    margin-left: 25px;
+.storageheader {
+  font-size: 20px;
+  color: var(--luminary-lightFontColor);
+  margin-bottom: 20px;
+  margin-left: 25px;
 }
-.MuiInputBase-root{
-    background-color: var(--luminary-dark) !important;
+.MuiInputBase-root {
+  background-color: var(--luminary-dark) !important;
 }
-.css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper{
-    background-color: var(--luminary-dark) !important;
+.css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  background-color: var(--luminary-dark) !important;
 }
-.css-1ll44ll-MuiOutlinedInput-notchedOutline{
-    color: var(--luminary-dark);
+.css-1ll44ll-MuiOutlinedInput-notchedOutline {
+  color: var(--luminary-dark);
 }
-.detail{
-    color: var(--luminary-lightFontColor);
-    padding-left: 55px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    text-decoration: underline;
-    text-decoration-color: var(--luminary-pink);
-    text-underline-offset: 15px;
-    text-decoration-thickness: 1px;
-
+.detail {
+  color: var(--luminary-lightFontColor);
+  padding-left: 55px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-decoration: underline;
+  text-decoration-color: var(--luminary-pink);
+  text-underline-offset: 15px;
+  text-decoration-thickness: 1px;
 }
