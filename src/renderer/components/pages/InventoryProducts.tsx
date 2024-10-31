@@ -14,7 +14,7 @@ export const InventoryProducts: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("test")/*DONT PUSH INTO GITHUB WITH LINK*/
+    axios.get(window.env.REACT_APP_API_URL + 'devices')
       .then(response => {
         console.log('Data received:', response.data);
         if (response.data && Array.isArray(response.data)) {
