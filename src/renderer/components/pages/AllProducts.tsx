@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import "../css/AllProducts.css"
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 interface Product {
   id: string;
@@ -27,26 +27,16 @@ export function AllProducts() {
     menu2: '',
     menu3: ''
   });
-  
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(window.env.REACT_APP_API_URL + 'devices');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-          throw new TypeError("Received non-JSON response");
-        }
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
 
-    fetchData();
+  useEffect(() => {
+    axios
+      .get(window.env.REACT_APP_API_URL + 'devices')
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data: ', error.response.data);
+      });
   }, []);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
