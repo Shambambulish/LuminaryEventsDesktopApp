@@ -5,6 +5,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid2';
+import Button from '@mui/material/Button';
 import placeholderlist from '../placeholderitems';
 import '../css/CreateProduct.css';
 
@@ -20,11 +21,17 @@ export function CreateProduct() {
       <div className="returnbutton">
         <IconButton onClick={() => handleClick('/Inventory')}>
           <Typography className="returntext"> Palaa</Typography>
-          <KeyboardReturnIcon></KeyboardReturnIcon>
+          <KeyboardReturnIcon />
         </IconButton>
       </div>
       <div className="gridcontainer">
-        <Grid container spacing={8}>
+        <Grid
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          container
+          spacing={8}
+        >
           <Grid size="auto">
             <h2>Name</h2>
             <TextField id="outlined-basic" label="Name" variant="outlined" />
@@ -61,6 +68,20 @@ export function CreateProduct() {
                 <TextField {...params} label="Item Type" />
               )}
             />
+          </Grid>
+          <Grid
+            display="flex"
+            justifyContent="center"
+            size={12}
+            alignItems="center"
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate('/Inventory')}
+            >
+              Sample nappula vie pois sivustolta until api implementation
+            </Button>
           </Grid>
         </Grid>
       </div>
