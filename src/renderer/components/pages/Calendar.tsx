@@ -1,20 +1,90 @@
 import '../css/Calendar.css';
-import * as React from 'react';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import 'dayjs/locale/fi';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { luminary } from '../Theme';
-import { Box } from '@mui/material';
-import APIconn from '../APIconn';
+import { Badge, Box } from '@mui/material';
+import { _get, _post, _put, _delete, EventInterface } from '../APIconn';
+import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
+import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
+import { useEffect, useRef, useState } from 'react';
+
+
 
 export function Calendar() {
-  const event_picked = 'Tapahtuma 15.7.2024 ';
-  const event_orderer = 'Matti Meikäläinen';
-  const order_info =
-    'Tarvin kaasupullon ja pullonmaitoa keikalle tetetetetetetetete tsajajajajajajajajajajajajaja';
+  const [value, setValue] = useState<Dayjs | null>(dayjs());
+  const [data, setData] = useState<EventInterface[]>([]);
+  //dayjs.locale('fi')
+
+  const onDateSelect = (event: any) => {
+    setValue(event);
+    let onlyDate = dayjs(event.$d).toISOString();
+    console.log('onlyDate: ', onlyDate)
+    fetchSelectedData(onlyDate);
+  };
+
+  useEffect(() => {
+    // Fetch data when component mounts
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await _get('orders', { headers: { Authorization: 'Bearer your_token_here' } });
+      setData(response.data);
+      console.log("Fetched data: ", response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle errors
+    }
+  };
+
+  const fetchSelectedData = async (onlyDate: any) => {
+    try {
+      const response = await _get(`orders/between/:${onlyDate}/:${onlyDate}`, { headers: { Authorization: 'Bearer your_token_here' } });
+      setData(response.data);
+      console.log("Responding: ", response);
+      console.log("Fetched data: ", response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle errors
+    }
+  };
+
+  const addData = async () => {
+    try {
+      const newData = { name: 'New Item' };
+      await _post('orders', newData);
+      fetchData(); // Refresh data after adding
+    } catch (error) {
+      console.error('Error adding data:', error);
+      // Handle errors
+    }
+  };
+
+  const updateData = async (id: any, updatedData: {} | undefined) => {
+    try {
+      await _put(`orders/${id}`, updatedData);
+      fetchData(); // Refresh data after updating
+    } catch (error) {
+      console.error('Error updating data:', error);
+      // Handle errors
+    }
+  };
+
+  const deleteData = async (id: any) => {
+    try {
+      await _delete(`orders/${id}`);
+      fetchData(); // Refresh data after deleting
+    } catch (error) {
+      console.error('Error deleting data:', error);
+      // Handle errors
+    }
+  };
+
   return (
     <div className="calendarcontainer">
       <div>
@@ -30,29 +100,31 @@ export function Calendar() {
             >
               <DemoItem label={'Tässä o kalenteri :D'}>
                 <DateCalendar
-                  defaultValue={dayjs()}
+                  value={value} 
+                  onChange={onDateSelect}
+                  renderLoading={() => <DayCalendarSkeleton />}
                   views={['year', 'month', 'day']}
+                  slots={{
+                  }}
+                  slotProps={{
+                    day: {
+                    } as any,
+                  }}
                 />
+                <button>Add New Event</button>
               </DemoItem>
             </DemoContainer>
-            {APIconn()}
-            {/*<Box className="calendarinfo">
-               <div className="eventinfo">
-                <p> {event_picked} </p>
-                <p> {event_orderer} </p>
-                <p> {order_info} </p>
-              </div>
-              <div className="eventinfo">
-                <p> {event_picked} </p>
-                <p> {event_orderer} </p>
-                <p> {order_info} </p>
-              </div>
-              <div className="eventinfo">
-                <p> {event_picked} </p>
-                <p> {event_orderer} </p>
-                <p> {order_info} </p>
-              </div> 
-            </Box>*/}
+            <Box className="calendarinfo">
+              {data.map((item: any) => (
+                <div className="eventinfo" key={item.id}>
+                  <p>{item.customer_name}</p>
+                  <p>{item.order_start_date}</p>
+                  <p>{item.message}</p>
+                  <button>Edit</button>
+                  <button>Delete</button>
+                </div>
+              ))}
+            </Box>
           </LocalizationProvider>
         </Box>
       </div>
