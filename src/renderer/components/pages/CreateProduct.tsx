@@ -2,14 +2,14 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { IconButton, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
+import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid2';
 import Button from '@mui/material/Button';
 import placeholderlist from '../placeholderitems';
 import '../css/CreateProduct.css';
-import { useState } from 'react';
-import axios from 'axios';
+import { _post } from '../APIconn';
 
 export function CreateProduct() {
   const navigate = useNavigate();
@@ -24,8 +24,7 @@ export function CreateProduct() {
     navigate(path);
   };
 
-  const handleSubmit = () => {
-    // axioksen http callin json body, menee postina apiin. todo: the postcall
+  const handleSubmit = async () => {
     const body = {
       name: namevalue,
       currentstock: currentstockvalue,
@@ -33,11 +32,15 @@ export function CreateProduct() {
       description: descriptionvalue,
       totalstock: totalstockvalue,
     };
-
     console.log(body);
-    // lisää axios callit
 
-    // todo: errorcheck;
+    try {
+      await _post('devices', body);
+      alert('data added!');
+    } catch (error) {
+      console.error('Error adding data:', error);
+      // Handle errors
+    }
   };
 
   return (
@@ -101,8 +104,20 @@ export function CreateProduct() {
               options={placeholderlist} // todo: remove placeholderitems.ts when implementing proper api calls
               sx={{ width: 300 }}
               freeSolo
-              onChange={(e) => settypeValue(e.target.value)}
+              onInputChange={(event, newInputValue) => {
+                settypeValue(newInputValue);
+              }}
+              onChange={(event, newValue) => {
+                if (typeof newValue === 'string') {
+                  settypeValue(newValue);
+                } else if (newValue && typeof newValue === 'object' && 'label' in newValue) {
+                  settypeValue(newValue.label);
+                } else {
+                  settypeValue('');
+                }
+              }}
               value={typevalue}
+              getOptionLabel={(option) => typeof option === 'string' ? option : option.label}
               renderInput={(params) => (
                 <TextField {...params} label="Item Type" />
               )}
