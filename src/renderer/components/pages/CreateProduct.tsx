@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid2';
 import Button from '@mui/material/Button';
 import placeholderlist from '../placeholderitems';
 import '../css/CreateProduct.css';
-import { _post } from '../APIconn';
+import { _post, _put, _delete, _get } from '../APIconn';
 
 export function CreateProduct() {
   const navigate = useNavigate();
@@ -110,14 +110,20 @@ export function CreateProduct() {
               onChange={(event, newValue) => {
                 if (typeof newValue === 'string') {
                   settypeValue(newValue);
-                } else if (newValue && typeof newValue === 'object' && 'label' in newValue) {
+                } else if (
+                  newValue &&
+                  typeof newValue === 'object' &&
+                  'label' in newValue
+                ) {
                   settypeValue(newValue.label);
                 } else {
                   settypeValue('');
                 }
               }}
               value={typevalue}
-              getOptionLabel={(option) => typeof option === 'string' ? option : option.label}
+              getOptionLabel={(option) =>
+                typeof option === 'string' ? option : option.label
+              }
               renderInput={(params) => (
                 <TextField {...params} label="Item Type" />
               )}
