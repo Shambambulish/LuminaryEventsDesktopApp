@@ -27,10 +27,10 @@ export function CreateProduct() {
   const handleSubmit = async () => {
     const body = {
       name: namevalue,
-      currentstock: currentstockvalue,
+      current_stock: currentstockvalue,
       type: typevalue,
       description: descriptionvalue,
-      totalstock: totalstockvalue,
+      total_stock: totalstockvalue,
     };
     console.log(body);
 
