@@ -11,19 +11,30 @@ import { _get, _post, _put, _delete, EventInterface } from '../APIconn';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+
+
 
 
 
 export function Calendar() {
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const [data, setData] = useState<EventInterface[]>([]);
-  //dayjs.locale('fi')
+  // const [open, setOpen] = useState(false);
+  dayjs.locale('fi')
+
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   const onDateSelect = (event: any) => {
     setValue(event);
     let onlyDate = dayjs(event.$d).toISOString();
     console.log('onlyDate: ', onlyDate)
-    fetchSelectedData(onlyDate);
   };
 
   useEffect(() => {
@@ -42,21 +53,23 @@ export function Calendar() {
     }
   };
 
-  const fetchSelectedData = async (onlyDate: any) => {
-    try {
-      const response = await _get(`orders/between/:${onlyDate}/:${onlyDate}`, { headers: { Authorization: 'Bearer your_token_here' } });
-      setData(response.data);
-      console.log("Responding: ", response);
-      console.log("Fetched data: ", response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      // Handle errors
-    }
-  };
 
   const addData = async () => {
     try {
-      const newData = { name: 'New Item' };
+      const newData = { 
+        'total_price': 1, 
+        'order_created_at': dayjs().toISOString(), 
+        'order_start_date': dayjs().toISOString(), 
+        'order_length_days': 1, 
+        'order_end_date': dayjs().add(1, 'day').toISOString(), 
+        'payment_resolved': 0, 
+        'payment_due_date': dayjs().add(2, 'day').toISOString(), 
+        'customer_name': 'marraskuutesti', 
+        'customer_phone_number': '123', 
+        'customer_email': 'testi@posti', 
+        'order_status': 'test', 'message': 
+        'testaan postia', 'contents': [],};
+      console.log("Data to post: ", newData);
       await _post('orders', newData);
       fetchData(); // Refresh data after adding
     } catch (error) {
@@ -78,11 +91,36 @@ export function Calendar() {
   const deleteData = async (id: any) => {
     try {
       await _delete(`orders/${id}`);
+      console.log("Data Deleted");
       fetchData(); // Refresh data after deleting
     } catch (error) {
       console.error('Error deleting data:', error);
       // Handle errors
     }
+  };
+
+  const handleClik = () => {
+    axios.post(`${window.env.REACT_APP_API_URL}orders`, {
+      'total_price': 1, 
+      'order_created_at': dayjs().toISOString(), 
+      'order_start_date': dayjs().toISOString(), 
+      'order_length_days': 1, 
+      'order_end_date': dayjs().add(1, 'day').toISOString(), 
+      'payment_resolved': 0, 
+      'payment_due_date': dayjs().add(2, 'day').toISOString(), 
+      'customer_name': 'marraskuutesti', 
+      'customer_phone_number': '123', 
+      'customer_email': 'testi@posti', 
+      'order_status': 'test', 
+      'message': 'testaan postia', 
+      'contents': [],
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
 
   return (
@@ -111,7 +149,8 @@ export function Calendar() {
                     } as any,
                   }}
                 />
-                <button>Add New Event</button>
+                <button onClick={addData}>Add New Event</button>
+                {/* <NewOrder open={open} handleClose={handleClose} /> */}
               </DemoItem>
             </DemoContainer>
             <Box className="calendarinfo">
@@ -121,7 +160,7 @@ export function Calendar() {
                   <p>{item.order_start_date}</p>
                   <p>{item.message}</p>
                   <button>Edit</button>
-                  <button>Delete</button>
+                  <button onClick={() => deleteData(item.id)}>Delete</button>
                 </div>
               ))}
             </Box>

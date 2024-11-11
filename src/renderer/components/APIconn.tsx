@@ -4,18 +4,19 @@ import { Fragment, useEffect, useState } from 'react';
 
 export interface EventInterface {
   id: number;
-  price: number;
+  total_price: number;
   order_length_days: number;
   payment_resolved: number;
   order_created_at: string;
   order_start_date: string;
   order_end_date: string;
-  order_due: string;
+  payment_due_date: string;
   customer_name: string;
-  customer_phone: string;
+  customer_phone_number: string;
   customer_email: string;
   order_status: string;
   message: string;
+  contents: [];
 }
 
 const BASE_URL = window.env.REACT_APP_API_URL;
@@ -23,11 +24,10 @@ const BASE_URL = window.env.REACT_APP_API_URL;
 const APIconn = axios.create({
   baseURL: BASE_URL,
   headers: {
-    //'Access-Control-Allow-Origin': '*',
-    //'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-    'Content-Type': 'application/json',
-    // tähän voi lisätä headereita, esim auth tokeni
-
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': '*',
+    'Content-Type': 'application/json; charset=UTF-8',
+    //'Access-Control-Allow-Headers': 'Content-Type'
   },
 });
 
@@ -44,7 +44,7 @@ const _delete = (url: string, config = {}) => {
 
 };const _post = (url: string, config = {}) => {
   return APIconn.post(url, config);
-}
+};
 
 // export API methods
 export { _get, _delete, _put, _post };
