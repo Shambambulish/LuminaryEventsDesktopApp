@@ -9,7 +9,6 @@ import '../css/AllProducts.css';
 import React, { useState, useEffect } from 'react';
 import { _get } from '../APIconn';
 import ProductPopup from '../ProductPopUp';
-import { Scale } from '@mui/icons-material';
 
 interface Product {
   id: string;
@@ -55,6 +54,7 @@ export function AllProducts() {
 
     fetchData();
   }, []);
+  
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     const { name, value } = event.target;
@@ -187,3 +187,4 @@ export function AllProducts() {
     </div>
   );
 }
+

@@ -2,27 +2,35 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { IconButton, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid2';
 import Button from '@mui/material/Button';
-import placeholderlist from '../placeholderitems';
+import { fetchUniqueTypes } from '../ItemTypes';
 import '../css/CreateProduct.css';
 import { _post, _put, _delete, _get } from '../APIconn';
 
 export function CreateProduct() {
   const navigate = useNavigate();
-
   const [namevalue, setnameValue] = useState('');
   const [currentstockvalue, setcurrentstockValue] = useState('');
   const [typevalue, settypeValue] = useState('');
   const [descriptionvalue, setdescriptionValue] = useState('');
   const [totalstockvalue, settotalstockValue] = useState('');
+  const [uniqueTypes, setUniqueTypes] = useState<string[]>([]);
 
   const handleClick = (path: string) => {
     navigate(path);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const types = await fetchUniqueTypes();
+      setUniqueTypes(types);
+    };
+    fetchData();
+  }, []);
 
   const handleSubmit = async () => {
     const body = {
@@ -101,8 +109,9 @@ export function CreateProduct() {
             <h2>Type</h2>
             <Autocomplete
               disablePortal
-              options={placeholderlist} // todo: remove placeholderitems.ts when implementing proper api calls
+              options={uniqueTypes}
               sx={{ width: 300 }}
+              
               freeSolo
               onInputChange={(event, newInputValue) => {
                 settypeValue(newInputValue);
@@ -115,15 +124,13 @@ export function CreateProduct() {
                   typeof newValue === 'object' &&
                   'label' in newValue
                 ) {
-                  settypeValue(newValue.label);
+                  settypeValue(newValue);
                 } else {
                   settypeValue('');
                 }
               }}
               value={typevalue}
-              getOptionLabel={(option) =>
-                typeof option === 'string' ? option : option.label
-              }
+              getOptionLabel={(option) => option}
               renderInput={(params) => (
                 <TextField {...params} label="Item Type" />
               )}

@@ -21,7 +21,7 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product }) => {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Product Details</DialogTitle>
+      <DialogTitle>Tuotteen tiedot</DialogTitle>
       <DialogContent>
         <Typography>Tuotteen nimi: {product.name}</Typography>
         <Typography>Kuvaus: {product.description}</Typography>
@@ -30,7 +30,7 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">
-          Close
+          SULJE
         </Button>
       </DialogActions>
     </Dialog>
