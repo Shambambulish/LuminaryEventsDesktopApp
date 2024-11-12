@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconButton, Typography } from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import axios from 'axios';
 import '../css/InventoryProducts.css';
+import { _get } from '../APIconn';
 
 interface Device {
   name: string;
   current_stock: number;
   id: number;
+  type: string;
 }
 
 export const InventoryProducts: React.FC = () => {
@@ -16,8 +17,7 @@ export const InventoryProducts: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`${window.env.REACT_APP_API_URL}devices`)
+    _get('devices')
       .then((response) => {
         console.log('Data received:', response.data);
         if (response.data && Array.isArray(response.data)) {
@@ -48,7 +48,7 @@ export const InventoryProducts: React.FC = () => {
         <ul className="tekstii">
           {device.map((device: Device) => (
             <li key={device.id}>
-              {device.current_stock} kpl: {device.name}
+              {device.current_stock} kpl: {device.name} tyyppiä {device.type}
             </li>
           ))}
         </ul>

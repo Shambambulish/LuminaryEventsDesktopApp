@@ -27,7 +27,6 @@ const electronHandler = {
 contextBridge.exposeInMainWorld('electron', electronHandler);
 
 contextBridge.exposeInMainWorld('env', {
-  ELECTRON_APP_SECRET_KEY: process.env.ELECTRON_APP_SECRET_KEY,
   REACT_APP_API_URL: process.env.REACT_APP_API_URL,
 });
 
