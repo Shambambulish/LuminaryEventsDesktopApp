@@ -1,0 +1,17 @@
+.css-10d30g3-MuiPaper-root-MuiDialog-paper{
+    width: 50%;
+}
+
+.MuiDialog-paper {
+    background-color: var(--luminary-dark) !important;
+  }
+  .MuiDialogContent-root {
+    color: var(--luminary-lightFontColor);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .MuiDialogTitle-root {
+    color: var(--luminary-lightFontColor);
+  }
+  

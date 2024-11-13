@@ -79,6 +79,22 @@ export function AllProducts() {
     setSelectedProduct(null);
   };
 
+  const handleEdit = (updatedProduct: Product) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
+    setFilteredProducts((prevFilteredProducts) =>
+      Object.keys(prevFilteredProducts).reduce((acc, key) => {
+        acc[key] = prevFilteredProducts[key].map((product) =>
+          product.id === updatedProduct.id ? updatedProduct : product
+        );
+        return acc;
+      }, {} as { [key: string]: Product[] })
+    );
+  };
+
   const handleClick = (path: string) => {
     navigate(path);
   };
@@ -183,7 +199,7 @@ export function AllProducts() {
           )}
         </div>
       </div>
-      <ProductPopup open={popupOpen} onClose={handleClosePopup} product={selectedProduct} />
+      <ProductPopup open={popupOpen} onClose={handleClosePopup} product={selectedProduct} onEdit={handleEdit} />
     </div>
   );
 }
