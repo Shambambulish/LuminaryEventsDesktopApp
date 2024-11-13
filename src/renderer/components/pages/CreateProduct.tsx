@@ -111,7 +111,6 @@ export function CreateProduct() {
               disablePortal
               options={uniqueTypes}
               sx={{ width: 300 }}
-              
               freeSolo
               onInputChange={(event, newInputValue) => {
                 settypeValue(newInputValue);
@@ -143,7 +142,7 @@ export function CreateProduct() {
             alignItems="center"
           >
             <Button variant="contained" color="primary" onClick={handleSubmit}>
-              data printed to console log until api implementation is done
+              Add Product
             </Button>
           </Grid>
         </Grid>
