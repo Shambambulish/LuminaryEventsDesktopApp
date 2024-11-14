@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, Typography } from '@mui/material';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions,
+  Button,
+  Typography,
+} from '@mui/material';
 import '../components/css/ProductPopup.css';
+import { _put } from './APIconn';
 
 interface PopupProps {
   open: boolean;
@@ -18,7 +27,12 @@ interface Product {
   total_stock: number;
 }
 
-const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit }) => {
+const ProductPopup: React.FC<PopupProps> = ({
+  open,
+  onClose,
+  product,
+  onEdit,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState<Product | null>(product);
 
@@ -35,6 +49,7 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit }) 
   const handleSaveClick = () => {
     if (editedProduct) {
       onEdit(editedProduct);
+      _put('devices' + Product.id, editedProduct);
     }
     setIsEditing(false);
   };
@@ -46,13 +61,15 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit }) 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditedProduct((prevProduct) => prevProduct ? { ...prevProduct, [name]: value } : null);
+    setEditedProduct((prevProduct) =>
+      prevProduct ? { ...prevProduct, [name]: value } : null,
+    );
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Tuotteen tiedot</DialogTitle>
-      <DialogContent className='popupContainer'>
+      <DialogContent className="popupContainer">
         {isEditing ? (
           <>
             <TextField
@@ -102,13 +119,13 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit }) 
       <DialogActions>
         {isEditing ? (
           <>
-          <Button onClick={handleSaveClick} color="primary">
-            Tallenna
-          </Button>
-          <Button onClick={handleCancelClick} color="primary">
-            Takaisin
-          </Button>
-        </>
+            <Button onClick={handleSaveClick} color="primary">
+              Tallenna
+            </Button>
+            <Button onClick={handleCancelClick} color="primary">
+              Takaisin
+            </Button>
+          </>
         ) : (
           <Button onClick={handleEditClick} color="primary">
             Muokkaa

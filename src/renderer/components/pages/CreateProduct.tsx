@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import { fetchUniqueTypes } from '../ItemTypes';
 import '../css/CreateProduct.css';
 import { _post, _put, _delete, _get } from '../APIconn';
+import { AlertSystem } from '../Alertsystem';
 
 export function CreateProduct() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export function CreateProduct() {
   const [descriptionvalue, setdescriptionValue] = useState('');
   const [totalstockvalue, settotalstockValue] = useState('');
   const [uniqueTypes, setUniqueTypes] = useState<string[]>([]);
+  const { showAlert, AlertComponent } = AlertSystem();
 
   const handleClick = (path: string) => {
     navigate(path);
@@ -40,13 +42,13 @@ export function CreateProduct() {
       description: descriptionvalue,
       total_stock: totalstockvalue,
     };
-    console.log(body);
 
     try {
       await _post('devices', body);
-      alert('data added!');
+      showAlert('Data sent succesfully!', 'success');
     } catch (error) {
-      console.error('Error adding data:', error);
+      console.log(error);
+      showAlert(error.message, 'error');
       // Handle errors
     }
   };
@@ -59,6 +61,7 @@ export function CreateProduct() {
           <KeyboardReturnIcon />
         </IconButton>
       </div>
+      <AlertComponent />
       <div className="gridcontainer">
         <Grid
           display="flex"
