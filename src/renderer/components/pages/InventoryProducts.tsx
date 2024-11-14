@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  IconButton,
-  List,
-  ListItemButton,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import { IconButton, List, ListItemButton, Typography } from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import '../css/InventoryProducts.css';
 import { _get } from '../APIconn';
 import ListSubheader from '@mui/joy/ListSubheader';
 import ListItem from '@mui/joy/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import Sheet from '@mui/joy/Sheet';
 
 interface Device {
