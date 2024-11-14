@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconButton, Typography } from '@mui/material';
+import {
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import '../css/InventoryProducts.css';
 import { _get } from '../APIconn';
+import ListSubheader from '@mui/joy/ListSubheader';
+import ListItem from '@mui/joy/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Sheet from '@mui/joy/Sheet';
 
 interface Device {
   name: string;
   current_stock: number;
+  total_stock: number;
   id: number;
   type: string;
 }
@@ -45,13 +56,45 @@ export const InventoryProducts: React.FC = () => {
       </div>
       <div>
         <h2>Täällä on varaston tuotteet</h2>
-        <ul className="tekstii">
+        <Sheet
+          variant="outlined"
+          sx={{
+            width: 700,
+            maxHeight: 300,
+            overflow: 'auto',
+            borderRadius: 'sm',
+          }}
+        >
           {device.map((device: Device) => (
-            <li key={device.id}>
-              {device.current_stock} kpl: {device.name} tyyppiä {device.type}
-            </li>
+            <List>
+              <ListSubheader sticky>Tuotteen nimi: {device.name}</ListSubheader>
+              <List
+                sx={{
+                  '--List-gap': '0px',
+                  '--List-radius': '0px',
+                  '--List-padding': '4px',
+                  '--ListItem-minHeight': '40px',
+                  '--ListItem-paddingY': '6px',
+                  '--ListItem-paddingX': '12px',
+                  '--ListItemDecorator-size': '40px',
+                  '--ListDivider-gap': '6px',
+                }}
+              >
+                <ListItem key={device.name}>
+                  <ListItemButton>
+                    Tuotteen tyyppi: {device.type}
+                  </ListItemButton>
+                  <ListItemButton>
+                    Varastossa: {device.current_stock}
+                  </ListItemButton>
+                  <ListItemButton>
+                    Yhteensä: {device.total_stock}
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </List>
           ))}
-        </ul>
+        </Sheet>
       </div>
     </div>
   );

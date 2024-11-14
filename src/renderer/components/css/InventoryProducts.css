@@ -1,3 +1,14 @@
-.tekstii {
+@import url('Variables.css');
+
+h2 {
   color: white;
+}
+
+.MuiSheet-root{
+  background-color: var(--luminary-darker) !important;
+}
+.MuiListSubheader-root{
+  background-color: var(--luminary-darker) !important;
+  color: var(--luminary-lightFontColor) !important;
+  padding-left: 15px !important;
 }
