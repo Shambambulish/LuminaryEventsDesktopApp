@@ -13,6 +13,8 @@ import { EventProducts } from './components/pages/EventProducts';
 import { History } from './components/pages/History';
 import { Scan } from './components/pages/Scan';
 import { CreateProduct } from './components/pages/CreateProduct';
+import { CreateEvent } from './components/pages/CreateEvent';
+
 
 export default function App() {
   return (
@@ -31,6 +33,7 @@ export default function App() {
           <Route path="/History" element={<History />} />
           <Route path="/Scan" element={<Scan />} />
           <Route path="/CreateProduct" element={<CreateProduct />} />
+          <Route path="/CreateEvent" element={<CreateEvent />} />
         </Routes>
       </div>
     </Router>

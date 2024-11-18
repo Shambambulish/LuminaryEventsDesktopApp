@@ -12,29 +12,29 @@ import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { AlertSystem } from '../Alertsystem';
 
 
 
 
 
 export function Calendar() {
+  const navigate = useNavigate();
   const [value, setValue] = useState<Dayjs | null>(dayjs());
   const [data, setData] = useState<EventInterface[]>([]);
-  // const [open, setOpen] = useState(false);
+  const { showAlert, AlertComponent } = AlertSystem();
+
   dayjs.locale('fi')
-
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
 
   const onDateSelect = (event: any) => {
     setValue(event);
     let onlyDate = dayjs(event.$d).toISOString();
     console.log('onlyDate: ', onlyDate)
+  };
+
+  const handleClick = (path: string) => {
+    navigate(path);
   };
 
   useEffect(() => {
@@ -67,8 +67,9 @@ export function Calendar() {
         'customer_name': 'marraskuutesti', 
         'customer_phone_number': '123', 
         'customer_email': 'testi@posti', 
-        'order_status': 'test', 'message': 
-        'testaan postia', 'contents': [],};
+        'order_status': 'test', 
+        'message': 'testaan postia', 
+        'contents': [],};
       console.log("Data to post: ", newData);
       await _post('orders', newData);
       fetchData(); // Refresh data after adding
@@ -149,7 +150,7 @@ export function Calendar() {
                     } as any,
                   }}
                 />
-                <button onClick={addData}>Add New Event</button>
+                <button onClick={() => handleClick('/CreateEvent')}>Add New Event</button>
                 {/* <NewOrder open={open} handleClose={handleClose} /> */}
               </DemoItem>
             </DemoContainer>
