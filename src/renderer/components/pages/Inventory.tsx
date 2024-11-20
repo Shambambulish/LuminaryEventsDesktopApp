@@ -65,8 +65,7 @@ export function Inventory() {
                   color={luminary.palette.secondaryContrastText}
                   sx={{ pointerEvents: 'none', fontSize: 45 }}
                 >
-                  {/*-1 is added to account for zero based indexing.*/}
-                  {Device.length - 1} KPL
+                  {Device.length} KPL
                 </Typography>
               </div>
             </Box>
