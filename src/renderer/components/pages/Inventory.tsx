@@ -4,6 +4,8 @@ import { luminary } from '../Theme';
 import '../css/Inventory.css';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import { useEffect, useState } from 'react';
+import { _get } from '../APIconn';
 
 export function Inventory() {
   const navigate = useNavigate();
@@ -11,6 +13,30 @@ export function Inventory() {
   const handleClick = (path: string) => {
     navigate(path);
   };
+
+  const [Device, setDevice] = useState<Device[]>([]);
+
+  interface Device {
+    name: string;
+    current_stock: number;
+    total_stock: number;
+    id: number;
+    type: string;
+  }
+
+  useEffect(() => {
+    _get('devices')
+      .then((response) => {
+        if (response.data && Array.isArray(response.data)) {
+          setDevice(response.data);
+        } else {
+          console.error('Unexpected response structure:', response.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
     <div>
@@ -39,8 +65,8 @@ export function Inventory() {
                   color={luminary.palette.secondaryContrastText}
                   sx={{ pointerEvents: 'none', fontSize: 45 }}
                 >
-                  {' '}
-                  XKPL
+                  {/*-1 is added to account for zero based indexing.*/}
+                  {Device.length - 1} KPL
                 </Typography>
               </div>
             </Box>
