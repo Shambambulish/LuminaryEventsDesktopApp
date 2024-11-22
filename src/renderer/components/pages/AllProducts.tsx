@@ -9,6 +9,7 @@ import '../css/AllProducts.css';
 import React, { useState, useEffect } from 'react';
 import { _get } from '../APIconn';
 import ProductPopup from '../ProductPopUp';
+import { AlertSystem } from '../Alertsystem';
 
 interface Product {
   id: string;
@@ -21,6 +22,7 @@ interface Product {
 
 export function AllProducts() {
   const navigate = useNavigate();
+  const { showAlert, AlertComponent } = AlertSystem();
   const [products, setProducts] = useState<Product[]>([]);
   const [uniqueTypes, setUniqueTypes] = useState<string[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -108,6 +110,7 @@ export function AllProducts() {
         return acc;
       }, {} as { [key: string]: Product[] })
     );
+    showAlert('Data deleted succesfully!', 'success');
     fetchData();
   };
 
@@ -210,6 +213,7 @@ export function AllProducts() {
             </div>
           )}
         </div>
+        <AlertComponent />
       </div>
       <ProductPopup open={popupOpen} onClose={handleClosePopup} product={selectedProduct} onEdit={handleEdit} onDelete={handleDelete} />
     </div>

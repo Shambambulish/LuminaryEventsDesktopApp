@@ -34,7 +34,6 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, on
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState<Product | null>(product);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const { showAlert } = AlertSystem();
 
   useEffect(() => {
     setEditedProduct(product);
@@ -71,11 +70,9 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, on
       try {
         await _delete(`devices/${product.id}`);
         onDelete(product.id);
-        showAlert('Data deleted succesfully!', 'success');
         onClose();
       } catch (error) {
         console.error(error);
-        showAlert(error.message, 'error');
       }
     }
   };
