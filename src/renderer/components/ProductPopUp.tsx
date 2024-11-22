@@ -11,7 +11,6 @@ import {
 import './css/ProductPopup.css';
 import { _put } from './APIconn';
 import { _delete } from './APIconn';
-import { AlertSystem } from './Alertsystem';
 
 interface PopupProps {
   open: boolean;
@@ -30,7 +29,13 @@ interface Product {
   total_stock: number;
 }
 
-const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, onDelete }) => {
+const ProductPopup: React.FC<PopupProps> = ({
+  open,
+  onClose,
+  product,
+  onEdit,
+  onDelete,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState<Product | null>(product);
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -62,7 +67,9 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, on
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditedProduct((prevProduct) => prevProduct ? { ...prevProduct, [name]: value } : null);
+    setEditedProduct((prevProduct) =>
+      prevProduct ? { ...prevProduct, [name]: value } : null,
+    );
   };
 
   const handleDeleteClick = async () => {
@@ -145,8 +152,12 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, on
             <Button onClick={handleSaveClick} color="primary">
               Tallenna
             </Button>
-            <Button onClick={handleConfirmOpen} color="primary">
-               Poista
+            <Button
+              variant="contained"
+              onClick={handleConfirmOpen}
+              color="error"
+            >
+              Poista Tuote
             </Button>
             <Button onClick={handleCancelClick} color="primary">
               Takaisin
@@ -154,29 +165,32 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, on
           </>
         ) : (
           <Button onClick={handleEditClick} color="primary">
-            Muokkaa
+            Muokkaa / Poista
           </Button>
         )}
         <Button onClick={onClose} color="primary">
           Sulje
         </Button>
         <Dialog open={confirmOpen} onClose={handleConfirmClose}>
-        <DialogTitle>Vahvista poisto</DialogTitle>
-        <DialogContent>
-          <Typography>Haluatko varmasti poistaa tämän tuotteen?</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleConfirmDelete} color="primary" className="majorbutton">
-            Poista
-          </Button>
-          <Button onClick={handleConfirmClose} color="primary">
-            Peruuta
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <DialogTitle>Vahvista poisto</DialogTitle>
+          <DialogContent>
+            <Typography>Haluatko varmasti poistaa tämän tuotteen?</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              variant="contained"
+              onClick={handleConfirmDelete}
+              color="error"
+            >
+              Poista
+            </Button>
+            <Button onClick={handleConfirmClose} color="primary">
+              Peruuta
+            </Button>
+          </DialogActions>
+        </Dialog>
       </DialogActions>
     </Dialog>
-    
   );
 };
 

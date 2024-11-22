@@ -14,8 +14,4 @@
   .MuiDialogTitle-root {
     color: var(--luminary-lightFontColor);
   }
-
-  .majorbutton:hover{
-    background-color: red;
-  }
   
