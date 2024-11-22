@@ -37,7 +37,7 @@ export function AllProducts() {
     menu3: '',
   });
 
-  useEffect(() => {
+
     const fetchData = async () => {
       try {
         const response = await _get(`devices`);
@@ -52,9 +52,13 @@ export function AllProducts() {
       }
     };
 
-    fetchData();
-  }, []);
+    useEffect(() => {
+      fetchData();
+    }, []);
   
+    const handleClick = (path: string) => {
+      navigate(path);
+    };
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     const { name, value } = event.target;
@@ -93,10 +97,18 @@ export function AllProducts() {
         return acc;
       }, {} as { [key: string]: Product[] })
     );
+    fetchData();
   };
 
-  const handleClick = (path: string) => {
-    navigate(path);
+  const handleDelete = (productId: string) => {
+    setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId));
+    setFilteredProducts((prevFilteredProducts) =>
+      Object.keys(prevFilteredProducts).reduce((acc, key) => {
+        acc[key] = prevFilteredProducts[key].filter((product) => product.id !== productId);
+        return acc;
+      }, {} as { [key: string]: Product[] })
+    );
+    fetchData();
   };
 
   return (
@@ -199,7 +211,7 @@ export function AllProducts() {
           )}
         </div>
       </div>
-      <ProductPopup open={popupOpen} onClose={handleClosePopup} product={selectedProduct} onEdit={handleEdit} />
+      <ProductPopup open={popupOpen} onClose={handleClosePopup} product={selectedProduct} onEdit={handleEdit} onDelete={handleDelete} />
     </div>
   );
 }

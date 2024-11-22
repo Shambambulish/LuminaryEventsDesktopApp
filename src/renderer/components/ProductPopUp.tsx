@@ -11,6 +11,7 @@ import {
 import './css/ProductPopup.css';
 import { _put } from './APIconn';
 import { _delete } from './APIconn';
+import { AlertSystem } from './Alertsystem';
 
 interface PopupProps {
   open: boolean;
@@ -32,6 +33,8 @@ interface Product {
 const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState<Product | null>(product);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const { showAlert } = AlertSystem();
 
   useEffect(() => {
     setEditedProduct(product);
@@ -68,11 +71,25 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, on
       try {
         await _delete(`devices/${product.id}`);
         onDelete(product.id);
+        showAlert('Data deleted succesfully!', 'success');
         onClose();
       } catch (error) {
-        console.error('Error deleting product:', error);
+        console.error(error);
+        showAlert(error.message, 'error');
       }
     }
+  };
+  const handleConfirmOpen = () => {
+    setConfirmOpen(true);
+  };
+
+  const handleConfirmClose = () => {
+    setConfirmOpen(false);
+  };
+
+  const handleConfirmDelete = () => {
+    handleDeleteClick();
+    setConfirmOpen(false);
   };
 
   return (
@@ -131,7 +148,7 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, on
             <Button onClick={handleSaveClick} color="primary">
               Tallenna
             </Button>
-            <Button onClick={handleDeleteClick} color="secondary" className="majorbutton">
+            <Button onClick={handleConfirmOpen} color="primary">
                Poista
             </Button>
             <Button onClick={handleCancelClick} color="primary">
@@ -146,9 +163,23 @@ const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, on
         <Button onClick={onClose} color="primary">
           Sulje
         </Button>
-
+        <Dialog open={confirmOpen} onClose={handleConfirmClose}>
+        <DialogTitle>Vahvista poisto</DialogTitle>
+        <DialogContent>
+          <Typography>Haluatko varmasti poistaa tämän tuotteen?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleConfirmDelete} color="primary" className="majorbutton">
+            Poista
+          </Button>
+          <Button onClick={handleConfirmClose} color="primary">
+            Peruuta
+          </Button>
+        </DialogActions>
+      </Dialog>
       </DialogActions>
     </Dialog>
+    
   );
 };
 
