@@ -8,14 +8,16 @@ import {
   Button,
   Typography,
 } from '@mui/material';
-import '../components/css/ProductPopup.css';
+import './css/ProductPopup.css';
 import { _put } from './APIconn';
+import { _delete } from './APIconn';
 
 interface PopupProps {
   open: boolean;
   onClose: () => void;
   product: Product | null;
   onEdit: (updatedProduct: Product) => void;
+  onDelete: (productId: string) => void;
 }
 
 interface Product {
@@ -27,18 +29,16 @@ interface Product {
   total_stock: number;
 }
 
-const ProductPopup: React.FC<PopupProps> = ({
-  open,
-  onClose,
-  product,
-  onEdit,
-}) => {
+const ProductPopup: React.FC<PopupProps> = ({ open, onClose, product, onEdit, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState<Product | null>(product);
 
   useEffect(() => {
     setEditedProduct(product);
-  }, [product]);
+    if (open) {
+      setIsEditing(false);
+    }
+  }, [product, open]);
 
   if (!product) return null;
 
@@ -49,7 +49,6 @@ const ProductPopup: React.FC<PopupProps> = ({
   const handleSaveClick = () => {
     if (editedProduct) {
       onEdit(editedProduct);
-      _put('devices' + Product.id, editedProduct);
     }
     setIsEditing(false);
   };
@@ -61,9 +60,19 @@ const ProductPopup: React.FC<PopupProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditedProduct((prevProduct) =>
-      prevProduct ? { ...prevProduct, [name]: value } : null,
-    );
+    setEditedProduct((prevProduct) => prevProduct ? { ...prevProduct, [name]: value } : null);
+  };
+
+  const handleDeleteClick = async () => {
+    if (product) {
+      try {
+        await _delete(`devices/${product.id}`);
+        onDelete(product.id);
+        onClose();
+      } catch (error) {
+        console.error('Error deleting product:', error);
+      }
+    }
   };
 
   return (
@@ -122,6 +131,9 @@ const ProductPopup: React.FC<PopupProps> = ({
             <Button onClick={handleSaveClick} color="primary">
               Tallenna
             </Button>
+            <Button onClick={handleDeleteClick} color="secondary" className="majorbutton">
+               Poista
+            </Button>
             <Button onClick={handleCancelClick} color="primary">
               Takaisin
             </Button>
@@ -134,6 +146,7 @@ const ProductPopup: React.FC<PopupProps> = ({
         <Button onClick={onClose} color="primary">
           Sulje
         </Button>
+
       </DialogActions>
     </Dialog>
   );

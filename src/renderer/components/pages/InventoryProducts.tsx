@@ -48,7 +48,7 @@ export const InventoryProducts: React.FC = () => {
         </IconButton>
       </div>
       <div>
-        <h2>Täällä on varaston tuotteet</h2>
+      <h2>Varastossa ovat seuraavat tuotteet:</h2>
         <Sheet
           variant="outlined"
           sx={{
