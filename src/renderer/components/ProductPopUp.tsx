@@ -52,9 +52,10 @@ const ProductPopup: React.FC<PopupProps> = ({
   const handleEditClick = () => {
     setIsEditing(true);
   };
-
-  const handleSaveClick = () => {
+  
+  const handleSaveClick = async () => {
     if (editedProduct) {
+      await _put(`devices/${editedProduct.id}`, editedProduct);
       onEdit(editedProduct);
     }
     setIsEditing(false);
