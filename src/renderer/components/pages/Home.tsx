@@ -1,40 +1,67 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import { AlertSystem } from '../Alertsystem';
+import React, { useEffect, useState } from 'react';
+import { Box, Button } from '@mui/material';
+import { _get, _delete } from '../APIconn'; // Ensure these are correctly implemented
+import { luminary } from '../Theme';
+import '../css/Home.css';
 
 export function Home() {
-  const { showAlert, AlertComponent } = AlertSystem();
+  interface Device {
+    name: string;
+    current_stock: number;
+    total_stock: number;
+    id: number;
+    type: string;
+  }
+  const [data, setData] = useState([]);
+
+  const deleteData = async (id: number) => {
+    try {
+      await _delete(`orders/${id}`);
+      console.log("Data Deleted");
+      fetchData(); // Refresh data after deleting
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const response = await _get('orders', { headers: { Authorization: `Bearer ${token}` } });
+      setData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []); // Fetch data on component mount
+
   return (
-    <div>
-      <Button
-        variant="contained"
-        color="success"
-        onClick={() => showAlert('testidata', 'success')} // message, severity
-      >
-        Testinappi 1
-      </Button>
-      <Button
-        variant="outlined"
-        color="info"
-        onClick={() => showAlert('Tää info toimi', 'info')} // message, severity
-      >
-        Testinappi 2
-      </Button>
-      <Button
-        variant="text"
-        color="error"
-        onClick={() => showAlert('Tää errori toimi', 'error')} // message, severity
-      >
-        Testinappi 3
-      </Button>
-      <Button
-        variant="outlined"
-        color="warning"
-        onClick={() => showAlert('Tää warningi toimi', 'warning')} // message, severity
-      >
-        Testinappi 4
-      </Button>
-      <AlertComponent />
-    </div>
+    <Box
+      className="container"
+      sx={{
+        backgroundColor: luminary.palette.primary.main,
+        padding: '16px',
+      }}
+    >
+      <Box className="calendarinfo">
+      <p> Tulevat Tapahtumat </p>
+        {data.length > 0 ? (
+          data.map((item) => (
+            <div className="eventinfo" key={item.id}>
+              <p>{item.customer_name}</p>
+              <p>{item.order_start_date}</p>
+              <p>{item.message}</p>
+              <Button>Edit</Button>
+              <Button onClick={() => deleteData(item.id)}>Delete</Button>
+            </div>
+          ))
+        ) : (
+          <p>Error Occured.</p>
+        )}
+      </Box>
+    </Box>
   );
 }
