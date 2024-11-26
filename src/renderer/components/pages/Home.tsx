@@ -26,8 +26,8 @@ export function Home() {
 
   const fetchData = async () => {
     try {
-      const token = localStorage.getItem('authToken');
-      const response = await _get('orders', { headers: { Authorization: `Bearer ${token}` } });
+    
+      const response = await _get('orders', { headers: { Authorization: `Bearer` } });
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
