@@ -21,7 +21,7 @@ export function History() {
   interface History {
     deviceID: string;
     listed_change: string;
-    time_changed: Date;
+    time_changed: string;
     id: number;
   }
 
