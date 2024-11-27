@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import {
   Dialog,
+  Checkbox,
   DialogTitle,
   DialogContent,
   TextField,
   DialogActions,
   Button,
   Typography,
+  FormControlLabel,
 } from '@mui/material';
 import './css/ProductPopup.css';
 import { _put } from './APIconn';
@@ -18,6 +20,7 @@ interface PopupProps {
   product: Product | null;
   onEdit: (updatedProduct: Product) => void;
   onDelete: (productId: string) => void;
+  onRefresh: () => void;
 }
 
 interface Product {
@@ -27,6 +30,7 @@ interface Product {
   description: string;
   current_stock: number;
   total_stock: number;
+  sub_ids: string;
 }
 
 const ProductPopup: React.FC<PopupProps> = ({
@@ -34,7 +38,8 @@ const ProductPopup: React.FC<PopupProps> = ({
   onClose,
   product,
   onEdit,
-  onDelete,
+  onDelete, 
+  onRefresh,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState<Product | null>(product);
@@ -52,13 +57,28 @@ const ProductPopup: React.FC<PopupProps> = ({
   const handleEditClick = () => {
     setIsEditing(true);
   };
-  
+
   const handleSaveClick = async () => {
     if (editedProduct) {
-      await _put(`devices/${editedProduct.id}`, editedProduct);
-      onEdit(editedProduct);
+      if (editedProduct.current_stock === editedProduct.total_stock) {
+        editedProduct.sub_ids = 'empty';
+      }
+      else {
+        const subIdsArray = Array.from({ length: editedProduct.total_stock }, (_, index) => {
+          return index < editedProduct.current_stock ? `${editedProduct.id}_${index + 1}` : null;
+        }).filter(Boolean);
+        editedProduct.sub_ids = subIdsArray.join(' ');
+      }
+      try {
+        await _put(`devices/${editedProduct.id}`, editedProduct);
+        onEdit(editedProduct);
+        onRefresh();
+      } catch (error) {
+        console.error('Error updating product:', error);
+      }
     }
     setIsEditing(false);
+    onClose();
   };
 
   const handleCancelClick = () => {
@@ -84,6 +104,10 @@ const ProductPopup: React.FC<PopupProps> = ({
       }
     }
   };
+  const bainallus = () => {
+    console.log(editedProduct?.sub_ids, subIdsArray);
+  }
+
   const handleConfirmOpen = () => {
     setConfirmOpen(true);
   };
@@ -96,6 +120,30 @@ const ProductPopup: React.FC<PopupProps> = ({
     handleDeleteClick();
     setConfirmOpen(false);
   };
+
+  const handleCheckboxChange = (index: number) => {
+    setEditedProduct((prevProduct) => {
+      if (!prevProduct) return null;
+      const newCurrentStock = prevProduct.current_stock === index + 1 ? index : index + 1;
+      return { ...prevProduct, current_stock: newCurrentStock };
+    });
+  };
+
+  const subIdsArray = editedProduct?.sub_ids ? editedProduct.sub_ids.split(' ') : [];
+
+  const checkboxes = Array.from({ length: editedProduct?.total_stock || 0 }, (_, index) => (
+    <FormControlLabel
+      key={index}
+      control={
+        <Checkbox
+          checked={index < (editedProduct?.current_stock || 0)}
+          onChange={() => handleCheckboxChange(index)}
+          disabled={!isEditing}
+        />
+      }
+      label={` ${product.id}_${index + 1}`}
+    />
+  ));
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -112,6 +160,14 @@ const ProductPopup: React.FC<PopupProps> = ({
               margin="normal"
             />
             <TextField
+              label="Tuotteen tyyppi"
+              name="type"
+              value={editedProduct?.type || ''}
+              onChange={handleChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
               label="Tuotteen kuvaus"
               name="description"
               value={editedProduct?.description || ''}
@@ -119,6 +175,7 @@ const ProductPopup: React.FC<PopupProps> = ({
               fullWidth
               margin="normal"
             />
+            <div className='stockContainer'>
             <TextField
               label="Määrä varastossa"
               name="current_stock"
@@ -137,15 +194,24 @@ const ProductPopup: React.FC<PopupProps> = ({
               fullWidth
               margin="normal"
             />
+            </div>
+            <div className='checkboxContainer'>
+              {checkboxes}
+              </div>
           </>
+          
         ) : (
           <>
             <Typography>Tuotteen nimi: {product.name}</Typography>
+            <Typography>Tuotteen tyyppi: {product.type}</Typography>
             <Typography>Tuotteen kuvaus: {product.description}</Typography>
             <Typography>Määrä varastossa: {product.current_stock}</Typography>
             <Typography>Kokonaismäärä: {product.total_stock}</Typography>
-          </>
-        )}
+              <div className='checkboxContainer'>
+              {checkboxes}
+              </div>
+            </>
+          )}
       </DialogContent>
       <DialogActions>
         {isEditing ? (

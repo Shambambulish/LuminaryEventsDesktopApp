@@ -18,6 +18,7 @@ interface Product {
   description: string;
   current_stock: number;
   total_stock: number;
+  sub_ids: string;
 }
 
 export function AllProducts() {
@@ -46,7 +47,6 @@ export function AllProducts() {
         const data = response.data;
         console.log("Fetched data: ", data);
         setProducts(data);
-
         const types = [...new Set(data.map((product: Product) => product.type))] as string[];
         setUniqueTypes(types);
       } catch (error) {
@@ -110,7 +110,17 @@ export function AllProducts() {
         return acc;
       }, {} as { [key: string]: Product[] })
     );
-    showAlert('Data deleted succesfully!', 'success');
+
+    setMenuValues((prevMenuValues) => {
+      const newMenuValues = { ...prevMenuValues };
+      (Object.keys(newMenuValues) as Array<keyof typeof newMenuValues>).forEach((key) => {
+        if (!filteredProducts[key].length) {
+          newMenuValues[key] = '';
+        }
+      });
+      showAlert('Data deleted successfully!', 'success');
+      return newMenuValues;
+    });
     fetchData();
   };
 
@@ -213,9 +223,9 @@ export function AllProducts() {
             </div>
           )}
         </div>
-        <AlertComponent />
       </div>
-      <ProductPopup open={popupOpen} onClose={handleClosePopup} product={selectedProduct} onEdit={handleEdit} onDelete={handleDelete} />
+      <ProductPopup open={popupOpen} onClose={handleClosePopup} product={selectedProduct} onEdit={handleEdit} onDelete={handleDelete} onRefresh={fetchData} />
+      <AlertComponent />
     </div>
   );
 }
