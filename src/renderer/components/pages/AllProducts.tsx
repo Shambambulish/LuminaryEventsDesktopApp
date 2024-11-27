@@ -100,6 +100,7 @@ export function AllProducts() {
       }, {} as { [key: string]: Product[] })
     );
     fetchData();
+    showAlert('Data updated successfully!', 'success');
   };
 
   const handleDelete = (productId: string) => {

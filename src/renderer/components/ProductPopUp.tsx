@@ -104,9 +104,7 @@ const ProductPopup: React.FC<PopupProps> = ({
       }
     }
   };
-  const bainallus = () => {
-    console.log(editedProduct?.sub_ids, subIdsArray);
-  }
+
 
   const handleConfirmOpen = () => {
     setConfirmOpen(true);
