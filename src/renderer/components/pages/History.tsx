@@ -76,7 +76,7 @@ export function History() {
                   <ListItemButton>
                     Muutosaika:
                     <br />
-                    {dayjs(history.time_changed).format('LLL')}
+                    {dayjs(History.time_changed).format('LLL')}
                   </ListItemButton>
                 </ListItem>
               </List>
