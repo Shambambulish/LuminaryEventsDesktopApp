@@ -1,14 +1,15 @@
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import { IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconButton, List, ListItemButton, Typography } from '@mui/material';
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import '../css/History.css';
-import { _get } from '../APIconn';
 import ListSubheader from '@mui/joy/ListSubheader';
 import ListItem from '@mui/joy/ListItem';
 import Sheet from '@mui/joy/Sheet';
+import dayjs from 'dayjs';
+import { _get } from '../APIconn';
+
+dayjs.locale('fi-FI');
 
 export function History() {
   const navigate = useNavigate();
@@ -17,18 +18,16 @@ export function History() {
   const handleClick = (path: string) => {
     navigate(path);
   };
-
   interface History {
     deviceID: string;
     listed_change: string;
-    time_changed: string;
+    time_changed: Date;
     id: number;
   }
 
   useEffect(() => {
     _get('history')
       .then((response) => {
-        console.log('Data received:', response.data);
         if (response.data && Array.isArray(response.data)) {
           setHistory(response.data);
         } else {
@@ -60,20 +59,9 @@ export function History() {
           }}
         >
           {History.map((History: History) => (
-            <List>
+            <List sx={{ wrap: true, width: 1, height: 1 }}>
               <ListSubheader sticky>Tuotteen ID: {History.id}</ListSubheader>
-              <List
-                sx={{
-                  '--List-gap': '0px',
-                  '--List-radius': '0px',
-                  '--List-padding': '4px',
-                  '--ListItem-minHeight': '40px',
-                  '--ListItem-paddingY': '6px',
-                  '--ListItem-paddingX': '12px',
-                  '--ListItemDecorator-size': '40px',
-                  '--ListDivider-gap': '6px',
-                }}
-              >
+              <List>
                 <ListItem key={History.id}>
                   <ListItemButton>
                     Tuotteen laiteID:
@@ -88,7 +76,7 @@ export function History() {
                   <ListItemButton>
                     Muutosaika:
                     <br />
-                    {History.time_changed}
+                    {dayjs(history.time_changed).format('LLL')}
                   </ListItemButton>
                 </ListItem>
               </List>
