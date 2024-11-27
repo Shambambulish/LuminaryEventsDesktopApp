@@ -14,7 +14,10 @@ export function Inventory() {
     navigate(path);
   };
 
-  const [Device, setDevice] = useState<Device[]>([]);
+  const [device, setDevice] = useState<Device[]>([]);
+  const [totalCurrentStock, setTotalCurrentStock] = useState<number>(0);
+  const [totalStock, setTotalStock] = useState<number>(0);
+
 
   interface Device {
     name: string;
@@ -29,6 +32,10 @@ export function Inventory() {
       .then((response) => {
         if (response.data && Array.isArray(response.data)) {
           setDevice(response.data);
+          const totalCurrent = response.data.reduce((sum, device) => sum + device.current_stock, 0);
+          const total = response.data.reduce((sum, device) => sum + device.total_stock, 0);
+          setTotalCurrentStock(totalCurrent);
+          setTotalStock(total);
         } else {
           console.error('Unexpected response structure:', response.data);
         }
@@ -37,6 +44,8 @@ export function Inventory() {
         console.error('Error fetching data:', error);
       });
   }, []);
+
+  const devicesInStock = device.filter(device => device.current_stock > 0);
 
   return (
     <div>
@@ -65,7 +74,7 @@ export function Inventory() {
                   color={luminary.palette.secondaryContrastText}
                   sx={{ pointerEvents: 'none', fontSize: 45 }}
                 >
-                  {Device.length} KPL
+                  {device.length} KPL
                 </Typography>
               </div>
             </Box>
@@ -87,16 +96,14 @@ export function Inventory() {
                   color={luminary.palette.secondaryContrastText}
                   sx={{ pointerEvents: 'none' }}
                 >
-                  {' '}
-                  Tuotteet varastossa{' '}
+                  Tuotteet varastossa
                 </Typography>
                 <Typography
                   className="storagedata"
                   color={luminary.palette.secondaryContrastText}
                   sx={{ pointerEvents: 'none', fontSize: 45 }}
                 >
-                  {' '}
-                  X/32
+                  {totalCurrentStock} / {totalStock}
                 </Typography>
               </div>
             </Box>
@@ -127,7 +134,7 @@ export function Inventory() {
                   sx={{ pointerEvents: 'none', fontSize: 45 }}
                 >
                   {' '}
-                  X/32
+                  {totalStock-totalCurrentStock} / {totalStock}
                 </Typography>
               </div>
             </Box>
