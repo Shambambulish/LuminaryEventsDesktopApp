@@ -45,7 +45,6 @@ export function Inventory() {
       });
   }, []);
 
-  const devicesInStock = device.filter(device => device.current_stock > 0);
 
   return (
     <div>
