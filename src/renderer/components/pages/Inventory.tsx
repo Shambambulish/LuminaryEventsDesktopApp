@@ -72,7 +72,7 @@ export function Inventory() {
                 <Typography
                   className="storagedata"
                   color={luminary.palette.secondaryContrastText}
-                  sx={{ pointerEvents: 'none', fontSize: 45 }}
+                  sx={{ pointerEvents: 'none'}}
                 >
                   {device.length} KPL
                 </Typography>
@@ -101,7 +101,7 @@ export function Inventory() {
                 <Typography
                   className="storagedata"
                   color={luminary.palette.secondaryContrastText}
-                  sx={{ pointerEvents: 'none', fontSize: 45 }}
+                  sx={{ pointerEvents: 'none' }}
                 >
                   {totalCurrentStock} / {totalStock}
                 </Typography>
@@ -131,9 +131,8 @@ export function Inventory() {
                 <Typography
                   className="storagedata"
                   color={luminary.palette.secondaryContrastText}
-                  sx={{ pointerEvents: 'none', fontSize: 45 }}
+                  sx={{ pointerEvents: 'none' }}
                 >
-                  {' '}
                   {totalStock-totalCurrentStock} / {totalStock}
                 </Typography>
               </div>
