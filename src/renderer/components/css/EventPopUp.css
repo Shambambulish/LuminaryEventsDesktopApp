@@ -1,0 +1,27 @@
+.css-10d30g3-MuiPaper-root-MuiDialog-paper{
+    width: 50%;
+}
+
+.MuiDialog-paper {
+    background-color: var(--luminary-dark) !important;
+  }
+  .MuiDialogContent-root {
+    color: var(--luminary-lightFontColor);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .MuiDialogTitle-root {
+    color: var(--luminary-lightFontColor);
+  }
+  .checkboxContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .css-rizt0-MuiTypography-root{
+    color: var(--luminary-lightFontColor) !important;
+  }
+  .stockContainer{
+    display: flex;
+    justify-content: space-between;
+  }

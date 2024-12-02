@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import axios from 'axios';
 import { Fragment, useEffect, useState } from 'react';
 
-export interface EventInterface {
+export interface Event {
   id: number;
   total_price: number;
   order_length_days: number;
