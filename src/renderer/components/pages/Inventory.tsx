@@ -14,10 +14,10 @@ export function Inventory() {
     navigate(path);
   };
 
+  const [history, setHistory] = useState<History[]>([]);
   const [device, setDevice] = useState<Device[]>([]);
   const [totalCurrentStock, setTotalCurrentStock] = useState<number>(0);
   const [totalStock, setTotalStock] = useState<number>(0);
-
 
   interface Device {
     name: string;
@@ -27,6 +27,13 @@ export function Inventory() {
     type: string;
   }
 
+  interface History {
+    deviceID: number;
+    listed_change: string;
+    time_changed: string;
+    id: number;
+  }
+  
   useEffect(() => {
     _get('devices')
       .then((response) => {
@@ -45,6 +52,29 @@ export function Inventory() {
       });
   }, []);
 
+  useEffect(() => {
+    _get('history')
+      .then((response) => {
+        if (response.data && Array.isArray(response.data)) {
+          setHistory(response.data);
+        } else {
+          console.error('Unexpected response structure:', response.data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  const formatListedChange = (listed_change: string) => {
+    if (listed_change.startsWith('Created device:')) {
+      return 'Luotiin LaiteID ';
+    } else if (listed_change.startsWith('Deleted device name:')) {
+      return 'Poistettiin LaiteID';
+    }
+    return 'Muokattiin LaiteID';
+
+  };
 
   return (
     <div>
@@ -160,13 +190,12 @@ export function Inventory() {
                   Historia{' '}
                 </Typography>
                 <Typography
-                  className="historydata"
-                  color={luminary.palette.primary.contrastText}
-                  sx={{ pointerEvents: 'none', fontSize: 15 }}
-                >
-                  {' '}
-                  Muutoksia: X poistettu ja Y lisätty
-                </Typography>
+                className="historydata"
+                color={luminary.palette.primary.contrastText}
+                sx={{ pointerEvents: 'none', whiteSpace: 'pre-line' }}
+              >
+                {history.slice(-3).map((item) => `${formatListedChange(item.listed_change)} ${item.deviceID}, MuutosID ${item.id}`).join('\n')}
+              </Typography>
               </div>
             </Box>
           </ThemeProvider>
