@@ -71,9 +71,9 @@ export function Inventory() {
       return 'Luotiin LaiteID ';
     } else if (listed_change.startsWith('Deleted device name:')) {
       return 'Poistettiin LaiteID';
+    } else {
+      return 'Muokattiin LaiteID';
     }
-    return 'Muokattiin LaiteID';
-
   };
 
   return (
@@ -194,7 +194,7 @@ export function Inventory() {
                 color={luminary.palette.primary.contrastText}
                 sx={{ pointerEvents: 'none', whiteSpace: 'pre-line' }}
               >
-                {history.slice(-3).map((item) => `${formatListedChange(item.listed_change)} ${item.deviceID}, MuutosID ${item.id}`).join('\n')}
+                {history.slice(0, 3).map((item) => `${formatListedChange(item.listed_change)} ${item.deviceID}, MuutosID ${item.id}`).join('\n')}
               </Typography>
               </div>
             </Box>
