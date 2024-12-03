@@ -59,7 +59,7 @@ export function History() {
           }}
         >
           {History.map((History: History) => (
-            <List sx={{ wrap: true, width: 1, height: 1 }}>
+            <List key={History.id} sx={{ wrap: true, width: 1, height: 1 }}>
               <ListSubheader sticky>Muutos: {History.id}</ListSubheader>
               <List>
                 <ListItem key={History.id}>

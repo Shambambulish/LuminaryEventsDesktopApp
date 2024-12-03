@@ -33,7 +33,7 @@ export function Settings() {
             backgroundColor: luminary.palette.primary.dark,
           }}
         >
-          RAYH
+          Asetus 1
         </Button>
         <Button
           variant="contained"
@@ -43,7 +43,7 @@ export function Settings() {
         >
           <Typography color={luminary.palette.secondaryContrastText}>
             {' '}
-            RAYH2{' '}
+            Asetus 2{' '}
           </Typography>
         </Button>
         <Button
@@ -54,7 +54,7 @@ export function Settings() {
         >
           <Typography color={luminary.palette.secondaryContrastText}>
             {' '}
-            RÖÖÖÖH{' '}
+            Asetus 3{' '}
           </Typography>
         </Button>
       </ThemeProvider>

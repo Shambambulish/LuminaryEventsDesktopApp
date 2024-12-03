@@ -23,9 +23,9 @@ export function Popup({ open, handleClose }: PopupProps) {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Asetukset Poopup</DialogTitle>
+      <DialogTitle>Asetukset PopUp</DialogTitle>
       <DialogContent>
-        Tänne voi tulla asetuksia
+        Tänne voi tulla asetuksia, jos niitä tarvitaan
         <FormControlLabel
           label="Asetus 1"
           value="asetus1"
