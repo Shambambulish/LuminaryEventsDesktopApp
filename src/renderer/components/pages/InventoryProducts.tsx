@@ -59,7 +59,7 @@ export const InventoryProducts: React.FC = () => {
           }}
         >
           {device.map((device: Device) => (
-            <List>
+            <List key={device.id}>
               <ListSubheader sticky>Tuotteen nimi: {device.name}</ListSubheader>
               <List
                 sx={{
