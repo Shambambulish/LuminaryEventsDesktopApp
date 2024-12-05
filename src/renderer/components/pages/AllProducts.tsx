@@ -142,7 +142,7 @@ export function AllProducts() {
           <InputLabel id="menu1-label" sx={{ color: 'white'}}>Valitse tuotetyyppi</InputLabel>
             <Select
               name="menu1"
-              value={menuValues.menu1}
+              value={uniqueTypes.includes(menuValues.menu1) ? menuValues.menu1 : ''}
               onChange={handleChange}
               sx={{ color: 'white', textTransform: 'uppercase' }}
             >
@@ -171,7 +171,7 @@ export function AllProducts() {
           <InputLabel id="menu2-label" sx={{ color: 'white'}}>Valitse tuotetyyppi</InputLabel>
             <Select
               name="menu2"
-              value={menuValues.menu2}
+              value={uniqueTypes.includes(menuValues.menu2) ? menuValues.menu2 : ''}
               onChange={handleChange}
               sx={{ color: 'white', textTransform: 'uppercase' }}
             >
@@ -200,7 +200,7 @@ export function AllProducts() {
           <InputLabel id="menu3-label" sx={{ color: 'white'}}>Valitse tuotetyyppi</InputLabel>
             <Select
               name="menu3"
-              value={menuValues.menu3}
+              value={uniqueTypes.includes(menuValues.menu3) ? menuValues.menu3 : ''}
               onChange={handleChange}
               sx={{ color: 'white', textTransform: 'uppercase' }}
             >
