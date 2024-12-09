@@ -24,21 +24,24 @@ export function Calendar() {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [popupOpen, setPopupOpen] = useState(false);
   const { showAlert, AlertComponent } = AlertSystem();
+  const [dt, setDt] = useState<Dayjs>();
+  const [highlightedDays, setHighlightedDays] = useState<String[]>([]);
 
   dayjs.locale('fi')
 
   const onDateSelect = (event: any) => {
     setValue(event);
-    let onlyDate = dayjs(event.$d).toISOString();
-    console.log('onlyDate: ', onlyDate)
+    let cleandate = dayjs(event.$d).startOf('day');
+    console.log('selected day: ', cleandate)
+    setDt(cleandate)
   };
 
   const handleClick = (path: string) => {
     navigate(path);
   };
 
-  const handleEventClick = (event: Event) => {
-    setSelectedEvent(event);
+  const handleEventClick = (item: Event) => {
+    setSelectedEvent(item);
     setPopupOpen(true);
   }
 
@@ -49,8 +52,8 @@ export function Calendar() {
 
   const handleEdit = (updatedEvent: Event) => {
     setEvents((prevEvents) =>
-      prevEvents.map((event) =>
-        event.id === updatedEvent.id ? updatedEvent : event
+      prevEvents.map((item) =>
+        item.id === updatedEvent.id ? updatedEvent : item
       )
     );
     fetchData();
@@ -58,7 +61,7 @@ export function Calendar() {
   };
 
   const handleDelete = (eventId: number) => {
-    setEvents((prevEvents) => prevEvents.filter((product) => product.id !== eventId));
+    setEvents((prevEvents) => prevEvents.filter((item) => item.id !== eventId));
     fetchData();
     showAlert('Data deleted successfully!', 'success');
   };
@@ -70,13 +73,37 @@ export function Calendar() {
   const fetchData = async () => {
     try {
       const response = await _get('orders', { headers: { Authorization: 'Bearer your_token_here' } });
-      setEvents(response.data);
       console.log("Fetched data: ", response.data);
+      setEvents(response.data);
+      console.log("Saved data: ", events);
+      setHighlightedDays(events.map((item: any) => (item.order_start_date.split('T')[0])));
+      console.log("Days to Highlight: ", highlightedDays);
     } catch (error) {
       console.error('Error fetching data:', error);
       // Handle errors
     }
   };
+
+function ServerDay(props: PickersDayProps<Dayjs> & { highlightedDays?: string[] }) {
+  
+  const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
+
+  const counter = {};
+  highlightedDays.forEach((x) => {counter[x] = (counter[x] || 0) + 1;});
+
+  const isSelected =
+    !props.outsideCurrentMonth && highlightedDays.includes(day.format("YYYY-MM-DD"));
+
+  return (
+    <Badge
+      key={props.day.toString()}
+      overlap="circular"
+      badgeContent={isSelected ? counter[day.format("YYYY-MM-DD")] : undefined}
+    >
+      <PickersDay {...other} outsideCurrentMonth={outsideCurrentMonth} day={day} />
+    </Badge>
+  );
+}
 
   return (
     <div className="calendarcontainer">
@@ -98,9 +125,11 @@ export function Calendar() {
                   renderLoading={() => <DayCalendarSkeleton />}
                   views={['year', 'month', 'day']}
                   slots={{
+                    day: ServerDay
                   }}
                   slotProps={{
                     day: {
+                      highlightedDays,
                     } as any,
                   }}
                 />
@@ -109,17 +138,28 @@ export function Calendar() {
               </DemoItem>
             </DemoContainer>
             <Box className="calendarinfo">
-              {events.map((event: any) => (
-                <Box 
-                  className="eventinfo" 
-                  key={event.id} onClick={() => handleEventClick(event)}
-                  sx={{cursor: 'pointer'}}
-                >
-                  <p>{event.customer_name}</p>
-                  <p>{event.order_start_date.split('T')[0]}</p>
-                  <p>{event.message}</p>
-                </Box>
-              ))}
+              {events
+                .filter( item => {
+                  let filterPass = true
+                  if (item.order_start_date) {
+                    filterPass = filterPass && (dayjs(item.order_start_date).startOf('day') <= dt!)
+                  }
+                  if (item.order_end_date) {
+                    filterPass = filterPass && (dayjs(item.order_end_date).startOf('day') >= dt!)
+                  }
+                  return filterPass
+                })
+                  .map((item: any) => (
+                    <Box 
+                      className="eventinfo" 
+                      key={item.id} onClick={() => handleEventClick(item)}
+                      sx={{cursor: 'pointer'}}
+                    >
+                      <p>{item.customer_name}</p>
+                      <p>{item.order_start_date.split('T')[0]}</p>
+                      <p>{item.message}</p>
+                    </Box>
+                  ))}
             </Box>
           </LocalizationProvider>
         </Box>

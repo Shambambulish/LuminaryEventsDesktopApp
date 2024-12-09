@@ -93,3 +93,7 @@
   margin-bottom: 10px;
   border-radius: 15px;
 }
+
+.MuiBadge-standard {
+  background-color: var(--luminary-blue) !important;
+}
