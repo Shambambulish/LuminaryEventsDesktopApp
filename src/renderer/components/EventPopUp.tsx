@@ -15,7 +15,7 @@ import {
 interface PopupProps {
     open: boolean;
     onClose: () => void;
-    event: Event | null;
+    item: Event | null;
     onEdit: (updatedEvent: Event) => void;
     onDelete: (eventId: number) => void;
     onRefresh: () => void;
@@ -24,23 +24,23 @@ interface PopupProps {
 const EventPopUp: React.FC<PopupProps> = ({
     open,
     onClose,
-    event,
+    item,
     onEdit,
     onDelete,
     onRefresh,
 }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [editedEvent, setEditedEvent] = useState<Event | null>(event);
+    const [editedEvent, setEditedEvent] = useState<Event | null>(item);
     const [confirmOpen, setConfirmOpen] = useState(false);
 
     useEffect(() => {
-        setEditedEvent(event);
+        setEditedEvent(item);
         if (open) {
           setIsEditing(false);
         }
-    }, [event, open]);
+    }, [item, open]);
 
-    if (!event) return null;
+    if (!item) return null;
 
     const handleEditClick = () => {
         setIsEditing(true);
@@ -62,7 +62,7 @@ const EventPopUp: React.FC<PopupProps> = ({
     
     const handleCancelClick = () => {
         setIsEditing(false);
-        setEditedEvent(event);
+        setEditedEvent(item);
     };
     
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,10 +73,10 @@ const EventPopUp: React.FC<PopupProps> = ({
     };
     
     const handleDeleteClick = async () => {
-        if (event) {
+        if (item) {
           try {
-            await _delete(`orders/${event.id}`);
-            onDelete(event.id);
+            await _delete(`orders/${item.id}`);
+            onDelete(item.id);
             onClose();
           } catch (error) {
             console.error(error);
@@ -193,16 +193,16 @@ const EventPopUp: React.FC<PopupProps> = ({
               
             ) : (
               <>
-                <Typography>Tilaaja: {event.customer_name}</Typography>
-                <Typography>Puhelinnumero: {event.customer_phone_number}</Typography>
-                <Typography>Sähköposti: {event.customer_email}</Typography>
-                <Typography>Viesti: {event.message}</Typography>
-                <Typography>Tilauksen status: {event.order_status}</Typography>
-                <Typography>Tilaus alkaa: {event.order_start_date}</Typography>
-                <Typography>Tilauksen kesto: {event.order_length_days}</Typography>
-                <Typography>Hinta: {event.total_price}</Typography>
-                <Typography>Maksutilanne: {event.payment_resolved}</Typography>
-                <Typography>Eräpäivä: {event.payment_due_date}</Typography>
+                <Typography>Tilaaja: {item.customer_name}</Typography>
+                <Typography>Puhelinnumero: {item.customer_phone_number}</Typography>
+                <Typography>Sähköposti: {item.customer_email}</Typography>
+                <Typography>Viesti: {item.message}</Typography>
+                <Typography>Tilauksen status: {item.order_status}</Typography>
+                <Typography>Tilaus alkaa: {item.order_start_date}</Typography>
+                <Typography>Tilauksen kesto: {item.order_length_days}</Typography>
+                <Typography>Hinta: {item.total_price}</Typography>
+                <Typography>Maksutilanne: {item.payment_resolved}</Typography>
+                <Typography>Eräpäivä: {item.payment_due_date}</Typography>
                 </>
               )}
           </DialogContent>

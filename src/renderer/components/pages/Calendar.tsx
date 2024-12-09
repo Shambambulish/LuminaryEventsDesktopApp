@@ -25,7 +25,7 @@ export function Calendar() {
   const [popupOpen, setPopupOpen] = useState(false);
   const { showAlert, AlertComponent } = AlertSystem();
   const [dt, setDt] = useState<Dayjs>();
-  const [highlightedDays, setHighlightedDays] = useState<String[]>([]);
+  const [highlightedDays, setHighlightedDays] = useState<any[]>([]);
 
   dayjs.locale('fi')
 
@@ -76,7 +76,7 @@ export function Calendar() {
       console.log("Fetched data: ", response.data);
       setEvents(response.data);
       console.log("Saved data: ", events);
-      setHighlightedDays(events.map((item: any) => (item.order_start_date.split('T')[0])));
+      setHighlightedDays(response.data.map((item: any) => (item.order_start_date.split('T')[0])));
       console.log("Days to Highlight: ", highlightedDays);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -164,7 +164,7 @@ function ServerDay(props: PickersDayProps<Dayjs> & { highlightedDays?: string[] 
           </LocalizationProvider>
         </Box>
       </div>
-      <EventPopUp open={popupOpen} onClose={handleClosePopup} event={selectedEvent} onEdit={handleEdit} onDelete={handleDelete} onRefresh={fetchData}/>
+      <EventPopUp open={popupOpen} onClose={handleClosePopup} item={selectedEvent} onEdit={handleEdit} onDelete={handleDelete} onRefresh={fetchData}/>
       <AlertComponent/>
     </div>
   );
