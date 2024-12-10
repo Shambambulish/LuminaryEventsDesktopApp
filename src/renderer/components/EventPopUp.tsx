@@ -32,18 +32,26 @@ const EventPopUp: React.FC<PopupProps> = ({
     const [isEditing, setIsEditing] = useState(false);
     const [editedEvent, setEditedEvent] = useState<Event | null>(item);
     const [confirmOpen, setConfirmOpen] = useState(false);
-
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const safeSplitDate = (dateString: string | null | undefined) =>
+      dateString ? dateString.split('T')[0] : '';
     useEffect(() => {
         setEditedEvent(item);
         if (open) {
           setIsEditing(false);
+          setErrors({});
         }
     }, [item, open]);
 
     if (!item) return null;
 
     const handleEditClick = () => {
+        if (!item) {
+          console.error("Cannot edit: item is null");
+          return;
+        }
         setIsEditing(true);
+        setEditedEvent(item);
     };
 
     const handleSaveClick = async () => {
@@ -147,7 +155,7 @@ const EventPopUp: React.FC<PopupProps> = ({
                 <TextField
                   label="Tapahtuma alkaa"
                   name="order_start_date"
-                  value={editedEvent?.order_start_date.split('T')[0] || ''}
+                  value={safeSplitDate(editedEvent?.order_start_date)}
                   onChange={handleChange}
                   fullWidth
                   margin="normal"
@@ -155,7 +163,7 @@ const EventPopUp: React.FC<PopupProps> = ({
                 <TextField
                   label="Eräpäivä"
                   name="payment_due_date"
-                  value={editedEvent?.payment_due_date.split('T')[0] || ''}
+                  value={safeSplitDate(editedEvent?.payment_due_date)}
                   onChange={handleChange}
                   fullWidth
                   margin="normal"
