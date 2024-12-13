@@ -32,3 +32,6 @@
 .nabbi.focus{
   background-color: var(--luminary-darkest) !important;
 }
+.exporttypes{
+  margin-bottom: 20px;
+}

@@ -76,18 +76,20 @@ export function Settings() {
   }, []);
 
   return (
-    <div className="settingcontainer">
+    <div className="settingcontainer"> 
       <ThemeProvider theme={luminary}>
+      <div className='exporttypes'>
         <ButtonGroup variant="contained" aria-label="Basic button group">
           <Button className={`nabbi ${exportType === 'json' ? 'focus' : ''}`} onClick={() => setExportType('json')}>JSON</Button>
           <Button className={`nabbi ${exportType === 'xls' ? 'focus' : ''}`} onClick={() => setExportType('xls')}>XLS</Button>
           <Button className={`nabbi ${exportType === 'csv' ? 'focus' : ''}`} onClick={() => setExportType('csv')}>CSV</Button>
         </ButtonGroup>
+      </div>
         <Button
           variant="contained"
           onClick={handleDeviceExport}
           style={{
-            backgroundColor: luminary.palette.primary.dark,
+            backgroundColor: luminary.palette.primary.main,
           }}
         >
           Backup Devices
@@ -99,22 +101,18 @@ export function Settings() {
             backgroundColor: luminary.palette.primary.main,
           }}
         >
-          <Typography color={luminary.palette.secondaryContrastText}>
             {' '}
             Backup Orders{' '}
-          </Typography>
         </Button>
         <Button
           variant="contained"
           onClick={handleCustomExport}
           sx={{
-            backgroundColor: luminary.palette.lumBlue,
+            backgroundColor: luminary.palette.primary.main,
           }}
         >
-          <Typography color={luminary.palette.secondaryContrastText}>
             {' '}
             Backup Other{' '}
-          </Typography>
         </Button>
       </ThemeProvider>
     </div>
