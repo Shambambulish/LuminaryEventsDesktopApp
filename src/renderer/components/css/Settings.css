@@ -29,3 +29,6 @@
 .MuiDialogTitle-root {
   color: aqua;
 }
+.nabbi.focus{
+  background-color: var(--luminary-darkest) !important;
+}
