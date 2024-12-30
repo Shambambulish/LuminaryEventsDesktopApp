@@ -18,6 +18,11 @@
   padding-left: 10px;
 }
 
+.showAllChecker {
+  padding-top: 5px;
+  padding-left: 50px;
+}
+
 .calendarinfo {
   color: var(--luminary-lightFontColor);
   position: absolute;

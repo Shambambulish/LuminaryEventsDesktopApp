@@ -10,6 +10,7 @@ import {
     Typography,
   } from '@mui/material';
   import './css/EventPopUp.css';
+import dayjs from 'dayjs';
 
 
 interface PopupProps {
@@ -33,6 +34,9 @@ const EventPopUp: React.FC<PopupProps> = ({
     const [editedEvent, setEditedEvent] = useState<Event | null>(item);
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [fieldError, setFieldError] = useState(false);
+    
+
     const safeSplitDate = (dateString: string | null | undefined) =>
       dateString ? dateString.split('T')[0] : '';
     useEffect(() => {
@@ -58,6 +62,7 @@ const EventPopUp: React.FC<PopupProps> = ({
         if (editedEvent) {
           try {
             await _put(`orders/${editedEvent.id}`, editedEvent);
+            console.log('Content of edit: ', editedEvent)
             onEdit(editedEvent);
             onRefresh();
           } catch (error) {
@@ -78,7 +83,13 @@ const EventPopUp: React.FC<PopupProps> = ({
         setEditedEvent((prevEvent) =>
           prevEvent ? { ...prevEvent, [name]: value } : null,
         );
+        if (e.target.validity.valid) {
+          setFieldError(false);
+        } else {
+          setFieldError(true);
+        }
     };
+
     
     const handleDeleteClick = async () => {
         if (item) {
@@ -113,6 +124,9 @@ const EventPopUp: React.FC<PopupProps> = ({
             {isEditing ? (
               <>
                 <TextField
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista kentät" : ""}
                   label="Tilaaja"
                   name="customer_name"
                   value={editedEvent?.customer_name || ''}
@@ -121,6 +135,9 @@ const EventPopUp: React.FC<PopupProps> = ({
                   margin="normal"
                 />
                 <TextField
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista Kentät" : ""}
                   label="Puhelinnumero"
                   name="customer_phone_number"
                   value={editedEvent?.customer_phone_number || ''}
@@ -129,6 +146,9 @@ const EventPopUp: React.FC<PopupProps> = ({
                   margin="normal"
                 />
                 <TextField
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista Kentät" : ""}
                   label="Sähköposti"
                   name="customer_email"
                   value={editedEvent?.customer_email || ''}
@@ -145,6 +165,9 @@ const EventPopUp: React.FC<PopupProps> = ({
                   margin="normal"
                 />
                 <TextField
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista Kentät" : ""}
                   label="Status"
                   name="order_status"
                   value={editedEvent?.order_status || ''}
@@ -153,7 +176,10 @@ const EventPopUp: React.FC<PopupProps> = ({
                   margin="normal"
                 />
                 <TextField
-                  label="Tapahtuma alkaa"
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista Kentät " : ""}
+                  label="Tapahtuma alkaa (YYYY-MM-DD)"
                   name="order_start_date"
                   value={safeSplitDate(editedEvent?.order_start_date)}
                   onChange={handleChange}
@@ -161,7 +187,21 @@ const EventPopUp: React.FC<PopupProps> = ({
                   margin="normal"
                 />
                 <TextField
-                  label="Eräpäivä"
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista Kentät" : ""}
+                  label="Tapahtuma päättyy (YYYY-MM-DD)"
+                  name="order_end_date"
+                  value={safeSplitDate(editedEvent?.order_end_date)}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                />
+                <TextField
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista Kentät" : ""}
+                  label="Eräpäivä (YYYY-MM-DD)"
                   name="payment_due_date"
                   value={safeSplitDate(editedEvent?.payment_due_date)}
                   onChange={handleChange}
@@ -170,15 +210,21 @@ const EventPopUp: React.FC<PopupProps> = ({
                 />
                 <div className='stockContainer'>
                 <TextField
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista Kentät" : ""}
                   label="Tilauksen kesto"
                   name="order_length_days"
                   type="number"
-                  value={editedEvent?.order_length_days || ''}
+                  value={editedEvent?.order_length_days || 1}
                   onChange={handleChange}
                   fullWidth
                   margin="normal"
                 />
                 <TextField
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista Kentät" : ""}
                   label="Hinta"
                   name="payment_resolved"
                   type="total_price"
@@ -188,6 +234,9 @@ const EventPopUp: React.FC<PopupProps> = ({
                   margin="normal"
                 />
                 <TextField
+                  required
+                  error={fieldError}
+                  helperText={fieldError ? "Tarkista Kentät" : ""}
                   label="Maksutilanne 0/1"
                   name="payment_resolved"
                   type="number"
@@ -207,6 +256,7 @@ const EventPopUp: React.FC<PopupProps> = ({
                 <Typography>Viesti: {item.message}</Typography>
                 <Typography>Tilauksen status: {item.order_status}</Typography>
                 <Typography>Tilaus alkaa: {item.order_start_date}</Typography>
+                <Typography>Tilaus päättyy: {item.order_end_date}</Typography>
                 <Typography>Tilauksen kesto: {item.order_length_days}</Typography>
                 <Typography>Hinta: {item.total_price}</Typography>
                 <Typography>Maksutilanne: {item.payment_resolved}</Typography>

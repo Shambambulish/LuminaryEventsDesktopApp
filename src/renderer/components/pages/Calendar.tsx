@@ -6,7 +6,7 @@ import 'dayjs/locale/fi';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { luminary } from '../Theme';
-import { Badge, Box } from '@mui/material';
+import { Badge, Box, Checkbox, FormControlLabel } from '@mui/material';
 import { _get, Event } from '../APIconn';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AlertSystem } from '../Alertsystem';
 import EventPopUp from '../EventPopUp'
+import { Label } from '@mui/icons-material';
 
 
 export function Calendar() {
@@ -26,6 +27,7 @@ export function Calendar() {
   const { showAlert, AlertComponent } = AlertSystem();
   const [dt, setDt] = useState<Dayjs>();
   const [highlightedDays, setHighlightedDays] = useState<any[]>([]);
+  const [showAll, setShowAll] = useState(false);
 
   dayjs.locale('fi')
 
@@ -137,19 +139,33 @@ function ServerDay(props: PickersDayProps<Dayjs> & { highlightedDays?: string[] 
                 {/* <NewOrder open={open} handleClose={handleClose} /> */}
               </DemoItem>
             </DemoContainer>
+            <FormControlLabel
+              className="showAllChecker"
+              label="Näytä kaikki tapahtumat"
+              value="showAll"
+              control={<Checkbox checked={showAll} onChange={() => setShowAll(showAll => !showAll)} />}
+            />
             <Box className="calendarinfo">
-              {events
-                .filter( item => {
-                  let filterPass = true
-                  if (item.order_start_date) {
-                    filterPass = filterPass && (dayjs(item.order_start_date).startOf('day') <= dt!)
-                  }
-                  if (item.order_end_date) {
-                    filterPass = filterPass && (dayjs(item.order_end_date).startOf('day') >= dt!)
-                  }
-                  return filterPass
-                })
-                  .map((item: any) => (
+              {showAll ? events.map((item: any) => (
+                  <Box 
+                      className="eventinfo" 
+                      key={item.id} onClick={() => handleEventClick(item)}
+                      sx={{cursor: 'pointer'}}
+                    >
+                      <p>{item.customer_name}</p>
+                      <p>{item.order_start_date.split('T')[0]}</p>
+                      <p>{item.message}</p>
+                    </Box>
+                )) : events.filter( item => {
+                    let filterPass = true
+                    if (item.order_start_date) {
+                      filterPass = filterPass && (dayjs(item.order_start_date).startOf('day') <= dt!)
+                    }
+                    if (item.order_end_date) {
+                      filterPass = filterPass && (dayjs(item.order_end_date).startOf('day') >= dt!)
+                    }
+                    return filterPass
+                  }).map((item: any) => (
                     <Box 
                       className="eventinfo" 
                       key={item.id} onClick={() => handleEventClick(item)}
@@ -159,7 +175,8 @@ function ServerDay(props: PickersDayProps<Dayjs> & { highlightedDays?: string[] 
                       <p>{item.order_start_date.split('T')[0]}</p>
                       <p>{item.message}</p>
                     </Box>
-                  ))}
+                  ))
+              }
             </Box>
           </LocalizationProvider>
         </Box>

@@ -35,7 +35,7 @@ export function CreateEvent() {
             'order_created_at': dayjs().toISOString(), 
             'order_start_date': startValue, 
             'order_length_days': lengthValue, 
-            'order_end_date': dayjs(startValue).add(parseInt(lengthValue), 'day').toISOString(), 
+            'order_end_date': dayjs(startValue).add(parseInt(lengthValue) - 1, 'day').toISOString(), 
             'payment_resolved': 0, 
             'payment_due_date': dueDateValue, 
             'customer_name': nameValue, 
