@@ -1,22 +1,21 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IconButton, Typography } from '@mui/material';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import JsBarcode from 'jsbarcode';
+import { QRCodeSVG } from 'qrcode.react';
 import '../css/Scan.css'; // Assuming you have a CSS file for styles
 
 export function Scan() {
   const navigate = useNavigate();
   const componentRef = useRef<HTMLDivElement>(null);
-  const barcodeRef = useRef<SVGSVGElement>(null);
+  const qrRef = useRef<SVGSVGElement>(null);
 
   const handlePrint = () => {
-    if (componentRef.current && barcodeRef.current) {
+    if (componentRef.current && qrRef.current) {
       const printContents = componentRef.current.innerHTML;
 
       // Get the SVG as a string
-      const barcodeSVG = new XMLSerializer().serializeToString(barcodeRef.current);
-
+      const qrSVG = new XMLSerializer().serializeToString(qrRef.current);
 
       // Create an iframe for printing
       const iframe = document.createElement('iframe');
@@ -34,7 +33,7 @@ export function Scan() {
 
         // Create a div for barcode SVG
         const div = iframeDoc.createElement('div');
-        div.innerHTML = barcodeSVG,
+        div.innerHTML = qrSVG;
         iframeDoc.body.appendChild(div);
 
         iframeDoc.write('</body></html>');
@@ -49,15 +48,6 @@ export function Scan() {
     navigate(path);
   };
 
-  useEffect(() => {
-    if (barcodeRef.current) {
-      JsBarcode(barcodeRef.current, "123456789012", {
-        format: "CODE128",
-        displayValue: true,
-      });
-    }
-  }, []);
-
   return (
     <div>
       <div className="returnbutton">
@@ -68,7 +58,7 @@ export function Scan() {
       </div>
       <div>
         <Typography variant="h4">Scan Page</Typography>
-        <svg ref={barcodeRef}></svg>
+        <QRCodeSVG value="https://reactjs.org/" marginSize={4} ref={qrRef} />
         <div ref={componentRef}></div>
         <button onClick={handlePrint}>Print</button>
       </div>

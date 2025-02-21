@@ -225,7 +225,7 @@ export function AllProducts() {
           )}
         </div>
       </div>
-      <ProductPopup open={popupOpen} onClose={handleClosePopup} product={selectedProduct} onEdit={handleEdit} onDelete={handleDelete} onRefresh={fetchData} />
+      <ProductPopup open={popupOpen} onClose={handleClosePopup} product={selectedProduct} onEdit={handleEdit} onDelete={handleDelete} onRefresh={fetchData} onPrint={() => {}} />
       <AlertComponent />
     </div>
   );

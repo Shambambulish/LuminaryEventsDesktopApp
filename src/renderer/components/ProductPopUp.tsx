@@ -11,6 +11,7 @@ import {
   FormControlLabel,
 } from '@mui/material';
 import './css/ProductPopup.css';
+import { QRCodeSVG } from 'qrcode.react';
 import { _put } from './APIconn';
 import { _delete } from './APIconn';
 
@@ -21,6 +22,7 @@ interface PopupProps {
   onEdit: (updatedProduct: Product) => void;
   onDelete: (productId: string) => void;
   onRefresh: () => void;
+  onPrint: () => void;
 }
 
 interface Product {
@@ -40,10 +42,14 @@ const ProductPopup: React.FC<PopupProps> = ({
   onEdit,
   onDelete, 
   onRefresh,
+  onPrint,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedProduct, setEditedProduct] = useState<Product | null>(product);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
+  const componentRef = React.useRef<HTMLDivElement>(null);
+  const qrRef = React.useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     setEditedProduct(product);
@@ -52,7 +58,9 @@ const ProductPopup: React.FC<PopupProps> = ({
     }
   }, [product, open]);
 
-  if (!product) return null;
+  if (!product) {
+    return null;
+  }
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -105,7 +113,6 @@ const ProductPopup: React.FC<PopupProps> = ({
     }
   };
 
-
   const handleConfirmOpen = () => {
     setConfirmOpen(true);
   };
@@ -125,6 +132,7 @@ const ProductPopup: React.FC<PopupProps> = ({
       const newCurrentStock = prevProduct.current_stock === index + 1 ? index : index + 1;
       return { ...prevProduct, current_stock: newCurrentStock };
     });
+    setCurrentIndex(index);
   };
 
   const subIdsArray = editedProduct?.sub_ids ? editedProduct.sub_ids.split(' ') : [];
@@ -142,6 +150,42 @@ const ProductPopup: React.FC<PopupProps> = ({
       label={` ${product.id}_${index + 1}`}
     />
   ));
+
+  const handlePrint = () => {
+    if (componentRef.current && qrRef.current) {
+      const printContents = componentRef.current.innerHTML;
+
+      // Get the SVG as a string
+      const qrSVG = new XMLSerializer().serializeToString(qrRef.current);
+
+      // Create an iframe for printing
+      const iframe = document.createElement('iframe');
+      iframe.style.position = 'absolute';
+      iframe.style.width = '0';
+      iframe.style.height = '0';
+      iframe.style.border = 'none';
+      document.body.appendChild(iframe);
+
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (iframeDoc) {
+        iframeDoc.open();
+        iframeDoc.write('<html><head><title>Print</title></head><body>');
+        iframeDoc.write('<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px;">');
+        iframeDoc.write(printContents);
+
+        // Create a div for barcode SVG
+        const div = iframeDoc.createElement('div');
+        div.innerHTML = qrSVG;
+        /* iframeDoc.body.appendChild(div); */
+
+        iframeDoc.write('</div>');
+        iframeDoc.write('</body></html>');
+        iframeDoc.close();
+        iframe.contentWindow?.print();
+        document.body.removeChild(iframe);
+      }
+    }
+  };
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -217,6 +261,9 @@ const ProductPopup: React.FC<PopupProps> = ({
             <Button onClick={handleSaveClick} color="primary">
               Tallenna
             </Button>
+            <Button onClick={() => handlePrint()} color="primary">
+              Tulosta
+            </Button>
             <Button
               variant="contained"
               onClick={handleConfirmOpen}
@@ -230,9 +277,19 @@ const ProductPopup: React.FC<PopupProps> = ({
           </>
         ) : (
           <Button onClick={handleEditClick} color="primary">
-            Muokkaa / Poista
+            Muokkaa / Poista / Tulosta
           </Button>
         )}
+        <div ref={componentRef} style={{ display: 'none' }}>
+            <QRCodeSVG size={256} value={`${product.id}_${currentIndex !== null ? currentIndex + 1 : ''} ${product.name}`} ref={qrRef} />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
+              <Typography style={{ textAlign: 'center', fontSize: '2em', fontFamily: 'Impact, Charcoal, sans-serif', border: '1px solid black', padding: '5px', borderRadius: '5px' }}>
+              {product.name}
+              <br />
+              ID: {`${product.id}_${currentIndex !== null ? currentIndex + 1 : ''}`}
+              </Typography>
+            </div>
+        </div>
         <Button onClick={onClose} color="primary">
           Sulje
         </Button>
